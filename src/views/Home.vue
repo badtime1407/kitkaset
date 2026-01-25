@@ -53,7 +53,7 @@ const products = ref([
     reviews: 41,
     image: 'https://erawanagri.com/wp-content/uploads/2022/04/erabas-640-240x300.png',
     badge: null,
-    link: '#'
+    link: ''
   }
 ])
 
@@ -125,7 +125,7 @@ const addToCart = (product) => {
       <section class="@container">
         <div class="relative overflow-hidden rounded-2xl shadow-md group cursor-pointer">
           <div class="flex min-h-[300px] md:min-h-[400px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-start justify-end px-6 pb-12 transition-transform duration-700 group-hover:scale-105"
-               style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%), url('https://images.unsplash.com/photo-1530263503766-32faeb211d0d?q=80&w=2670&auto=format&fit=crop');"> 
+               style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWdyaWN1bHR1cmV8ZW58MHx8MHx8fDA%3D');">  
           </div>
         </div>
       </section>
@@ -216,7 +216,7 @@ const addToCart = (product) => {
             <div class="absolute inset-0 bg-gradient-to-r from-[#1a2e1c] via-[#1a2e1c]/80 to-transparent md:bg-none z-0"></div>
             <img 
               class="w-full h-full object-cover object-center" 
-              src="https://images.unsplash.com/photo-1595244569302-3c372558509e?q=80&w=2670&auto=format&fit=crop" 
+              src="https://plus.unsplash.com/premium_photo-1678344170545-c3edef92a16e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YWdyaWN1bHR1cmV8ZW58MHx8MHx8fDA%3D" 
               alt="Agronomist with tablet" 
             />
           </div>
