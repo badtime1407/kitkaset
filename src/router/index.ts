@@ -7,7 +7,8 @@ import Productall from '../views/Productall.vue'
 import Product1 from '../views/Product1.vue'
 import Product2 from '../views/Product2.vue'
 import Product3 from '../views/Product3.vue'
-import ShoppingCart from '../views/ShoppingCart.vue'
+import ShoppingCart from '../views/Shoppingcart.vue'
+import Profile from '../views/profile.vue'
 
 
 const routes = [
@@ -20,7 +21,8 @@ const routes = [
   { path: '/product2' , component: Product2},
   { path: '/product3' , component: Product3},
   { path: '/shoppingcart' , component: ShoppingCart},
-
+  { path: '/profile' , component : Profile},
+ 
 ]
 
 const router = createRouter({
