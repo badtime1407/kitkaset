@@ -53,7 +53,7 @@ const products = ref([
     reviews: 41,
     image: 'https://erawanagri.com/wp-content/uploads/2022/04/erabas-640-240x300.png',
     badge: null,
-    link: ''
+    link: '#'
   }
 ])
 
@@ -125,7 +125,7 @@ const addToCart = (product) => {
       <section class="@container">
         <div class="relative overflow-hidden rounded-2xl shadow-md group cursor-pointer">
           <div class="flex min-h-[300px] md:min-h-[400px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-start justify-end px-6 pb-12 transition-transform duration-700 group-hover:scale-105"
-               style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWdyaWN1bHR1cmV8ZW58MHx8MHx8fDA%3D');">  
+               style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%), url('/public/Background.png');">  
           </div>
         </div>
       </section>
@@ -198,30 +198,32 @@ const addToCart = (product) => {
         </div>
       </section>
 
-      <section class="bg-[#1a2e1c] rounded-2xl overflow-hidden relative shadow-lg mt-12">
-        <div class="flex flex-col md:flex-row items-center min-h-[320px]">
-          
-          <div class="flex-1 p-8 md:p-12 z-10 relative">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Need Expert Advice?</h2>
-            <p class="text-white/80 mb-8 max-w-md leading-relaxed">
-              Our certified agronomists are available 24/7 to help you diagnose plant diseases and recommend the right products for your soil type.
-            </p>
+     <section class="bg-[#1a2e1c] rounded-2xl overflow-hidden relative shadow-lg mt-12">
+    <div class="flex flex-col md:flex-row items-stretch min-h-[320px]">
+      
+      <div class="flex-1 p-8 md:p-12 z-10 relative flex flex-col justify-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">ต้องการคำแนะนำจากผู้เชี่ยวชาญไหม?</h2>
+        <p class="text-white/80 mb-8 max-w-md leading-relaxed">
+         นักเกษตรผู้เชี่ยวชาญของเราที่ได้รับการรับรองพร้อมให้บริการตลอด 24 ชั่วโมง เพื่อช่วยคุณวินิจฉัยโรคพืชและแนะนำผลิตภัณฑ์ที่เหมาะสมกับประเภทดินของคุณ
+        </p>
+        <div>
             <button class="flex items-center gap-2 bg-[#1ED730] text-[#0d1b0f] font-bold px-6 py-3 rounded-lg hover:bg-[#18b528] transition-all shadow-md active:scale-95">
-              <span class="material-symbols-outlined">support_agent</span>
-              Book Consultation
+            <span class="material-symbols-outlined">support_agent</span>
+            Book Consultation
             </button>
-          </div>
-
-          <div class="w-full md:w-1/2 h-64 md:h-full absolute md:relative right-0 top-0 bottom-0">
-            <div class="absolute inset-0 bg-gradient-to-r from-[#1a2e1c] via-[#1a2e1c]/80 to-transparent md:bg-none z-0"></div>
-            <img 
-              class="w-full h-full object-cover object-center" 
-              src="https://plus.unsplash.com/premium_photo-1678344170545-c3edef92a16e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YWdyaWN1bHR1cmV8ZW58MHx8MHx8fDA%3D" 
-              alt="Agronomist with tablet" 
-            />
-          </div>
         </div>
-      </section>
+      </div>
+
+      <div class="w-full md:w-1/2 relative min-h-[320px] md:min-h-full">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#1a2e1c] via-[#1a2e1c]/60 to-transparent z-10 pointer-events-none"></div>
+        <img 
+          class="w-full h-full object-cover object-center z-0 relative" 
+          src="/ER1.png" 
+          alt="Agronomist with tablet" 
+        />
+      </div>
+    </div>
+</section>
 
       <section class="grid grid-cols-1 md:grid-cols-3 gap-8 py-6 px-4">
         <div v-for="(feature, index) in features" :key="index" class="flex items-start gap-4">
