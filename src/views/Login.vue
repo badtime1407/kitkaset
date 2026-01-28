@@ -9,19 +9,7 @@ const rememberMe = ref(false)
 // State สำหรับลูกเล่น UI
 const showPassword = ref(false)
 
-// ฟังก์ชันสำหรับ Login
-const handleLogin = () => {
-  // ในการใช้งานจริง ตรงนี้จะเป็นการเรียก API หรือ router.push()
-  console.log('Login Submitted:', {
-    email: email.value,
-    password: password.value,
-    rememberMe: rememberMe.value
-  })
-  
-  // ตัวอย่างการเปลี่ยนหน้า:
-  // router.push('/home') 
-  alert('Login clicked! (Check console for data)')
-}
+
 </script>
 
 <template>
@@ -106,21 +94,16 @@ const handleLogin = () => {
             <a href="#" class="font-medium text-gray-600 hover:text-gray-900">Forgot password?</a>
           </div>
 
-          <button 
-            type="submit" 
-            class="w-full btn-green text-black font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:shadow-lg transition duration-200"
-          >
-            Login
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
+        
+           <RouterLink to="/" class="block w-full py-3 rounded-lg bg-green-500 text-black text-lg font-semibold hover:bg-green-600 transition mt-2 text-center">
+                        Login 
+        </RouterLink>
         </form>
 
         <div class="mt-20 pt-6">
           <div class="flex justify-between items-center text-sm">
             <span class="text-gray-500">New user?</span>
-            <a href="#" class="font-bold text-green-600 hover:underline">Create an account</a>
+            <a href="#" class="font-bold text-green-600 hover:underline">Create an account </a>
           </div>
 
           <div class="mt-8 flex justify-between text-[10px] text-gray-500 uppercase tracking-wide font-medium">
