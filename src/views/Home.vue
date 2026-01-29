@@ -6,8 +6,8 @@ const cartCount = ref(3)
 
 // --- State หมวดหมู่ (Categories) ---
 const categories = ref([
-  { name: 'ทั้งหมด', icon: 'potted_plant', link: '#' },
-  { name: 'สารกำจัดวัชพืช', icon: 'eco', link: '#' },
+  { name: 'ทั้งหมด', icon: 'potted_plant', link: '/Productall' },
+  { name: 'สารกำจัดวัชพืช', icon: 'eco', link: '/Product1' },
   { name: 'สารกำจัดแมลง', icon: 'bug_report', link: '#' },
   { name: 'สารป้องกันโรค', icon: 'construction', link: '#' }
 ])
@@ -125,7 +125,7 @@ const addToCart = (product) => {
       <section class="@container">
         <div class="relative overflow-hidden rounded-2xl shadow-md group cursor-pointer">
           <div class="flex min-h-[300px] md:min-h-[400px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-start justify-end px-6 pb-12 transition-transform duration-700 group-hover:scale-105"
-               style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%), url('/public/Background.png');">  
+               style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%), url('/Background.png');">  
           </div>
         </div>
       </section>
@@ -267,7 +267,7 @@ const addToCart = (product) => {
          <div>
             <h4 class="font-bold text-sm mb-4 text-gray-900">Services</h4>
             <ul class="text-xs space-y-3 text-gray-500">
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Expert Consultation</a></li>
+                <li><a class="hover:text-[#1ED730] transition-colors" href="">Expert Consultation</a></li>
                 <li><a class="hover:text-[#1ED730] transition-colors" href="#">Soil Testing</a></li>
                 <li><a class="hover:text-[#1ED730] transition-colors" href="#">Bulk Ordering</a></li>
                 <li><a class="hover:text-[#1ED730] transition-colors" href="#">Weather Reports</a></li>
