@@ -29,7 +29,7 @@ const handleLogin = () => {
 
         <div class="flex items-center justify-center w-full">
             <img 
-              src="/public/Logo.png" 
+              src="/Logo.png" 
               alt="Agri Chem Graphic" 
               class="object-contain max-h-[400px] w-auto drop-shadow-lg"
             />
