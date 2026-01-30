@@ -96,19 +96,25 @@ const addToCart = (product) => {
         </div>
       </div>
 
-      <div class="flex items-center gap-3 shrink-0">
-        <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#eff7f0] text-black hover:bg-[#dcefe0] transition">
-          <span class="material-symbols-outlined">person</span>
-        </button>
-        <router-link to="/Shoppingcart" class="relative">
-          <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#eff7f0] text-black hover:bg-[#dcefe0] transition">
-            <span class="material-symbols-outlined">shopping_cart</span>
-          </button>
-          <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1ED730] text-[10px] font-bold text-white border-2 border-white">
-            {{ cartCount }}
-          </span>
-        </router-link>
-      </div>
+  <div class="flex items-center gap-3 shrink-0">
+  <router-link to="/Shoppingcart" class="relative">
+    <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#eff7f0] text-black hover:bg-[#dcefe0] transition">
+      <span class="material-symbols-outlined">shopping_cart</span>
+    </button>
+    <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1ED730] text-[10px] font-bold text-white border-2 border-white">
+      {{ cartCount }}
+    </span>
+  </router-link>
+
+  <router-link to="/Profile" class="relative">
+    <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#eff7f0] text-black hover:bg-[#dcefe0] transition">
+      <span class="material-symbols-outlined">person</span>
+    </button>
+    <span v-if="notificationCount > 0" class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1ED730] text-[10px] font-bold text-white border-2 border-white">
+      {{ notificationCount }}
+    </span>
+  </router-link>
+</div>
     </header>
 
     <main class="max-w-[1280px] mx-auto px-4 md:px-10 lg:px-40 py-8 space-y-12">
