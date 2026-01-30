@@ -7,44 +7,65 @@ const selectedCategory = ref('ทั้งหมด');
 const selectedBrands = ref(['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva Agriscience']);
 
 // --- Data ---
+// เพิ่ม property "link" ให้กับสินค้าแต่ละชิ้น
 const products = ref([
-    { id: 1, name: 'อะบาเมกติน',
-    price: 260,
-    image: 'https://max-ag.com/wp-content/uploads/2022/02/%E0%B8%AD%E0%B8%B0%E0%B8%9A%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%99.png',
-    tag: 'Top Rated',
-    tagColor: 'bg-[#13ec25] text-black',
-    brand: 'Bayer Crop Science' },
-    { id: 2,
+    { 
+      id: 1, 
+      name: 'อะบาเมกติน',
+      price: 260,
+      image: 'https://max-ag.com/wp-content/uploads/2022/02/%E0%B8%AD%E0%B8%B0%E0%B8%9A%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%99.png',
+      tag: 'Top Rated',
+      tagColor: 'bg-[#13ec25] text-black',
+      brand: 'Bayer Crop Science',
+      link: '/Shoppingcart' // ระบุ path ที่ต้องการให้ไป
+    },
+    { 
+      id: 2,
       name: 'ฟีโนบูคาร์บ',
       price: 320, 
       image: 'https://www.qmaxagrotech.com/images/content/original-1727402473253.png',
       tag: 'Best Value', 
       tagColor: 'bg-blue-600 text-white', 
-      brand: 'Syngenta' },
-    { id: 3, name: 'คิวแม็กพินาโซล', 
+      brand: 'Syngenta',
+      link: '/Shoppingcart'
+    },
+    { 
+      id: 3, 
+      name: 'คิวแม็กพินาโซล', 
       price: 550, 
       image: 'https://www.qmaxagrotech.com/images/content/original-1685436057325.png', 
       tag: null, 
-      brand: 'BASF Agricultural' },
-    { id: 4,
+      brand: 'BASF Agricultural',
+      link: '/Shoppingcart'
+    },
+    { 
+      id: 4,
       name: 'พรีมิส เอสซี 200', 
       price: 60, 
       image: 'https://www.cheminpestcontrol.com/cdn/shop/products/Premise-SC200_1024x1024.png?v=1579663268',
       tag: null,
-      brand: 'Bayer Crop Science' },
-    { id: 5,
+      brand: 'Bayer Crop Science',
+      link: '/Shoppingcart'
+    },
+    { 
+      id: 5,
       name: 'โซเพอร์การ์ด 10 อีซี', 
       price: 150,  
       image: 'https://www.cheminpestcontrol.com/cdn/shop/products/10---1_grande.png?v=1543376829', 
       tag: null,
-      brand: 'Corteva Agriscience' },
-    { id: 6, 
+      brand: 'Corteva Agriscience',
+      link: '/Shoppingcart'
+    },
+    { 
+      id: 6, 
       name: 'เอราบาส',
       price: 260, 
       image: 'https://erawanagri.com/wp-content/uploads/2022/04/erabas-640-240x300.png', 
       tag: null,
-      brand: 'Syngenta' }
-  ]);
+      brand: 'Syngenta',
+      link: '/Shoppingcart'
+    }
+]);
 
 const filteredProducts = computed(() => {
   return products.value.filter(product => {
@@ -91,7 +112,7 @@ const navItems = [
 
       <div class="flex items-center gap-4 flex-1 max-w-md justify-end">
         <div class="flex gap-2">
-          <button class="p-2 text-gray-600 hover:text-[#1ED730]"><span class="material-symbols-outlined">shopping_cart</span></button>
+          <router-link to="/Shoppingcart" class="p-2 text-gray-600 hover:text-[#1ED730]"><span class="material-symbols-outlined">shopping_cart</span></router-link>
           <button class="p-2 text-gray-600 hover:text-[#1ED730]"><span class="material-symbols-outlined">person</span></button>
         </div>
       </div>
@@ -148,22 +169,32 @@ const navItems = [
         </div>
 
         <div v-if="filteredProducts.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          <div v-for="p in filteredProducts" :key="p.id" class="group bg-white rounded-[2rem] border border-[#E7F0E8] p-4 transition-all hover:shadow-2xl hover:shadow-[#13ec25]/10 hover:-translate-y-1">
+          <router-link 
+            v-for="p in filteredProducts" 
+            :key="p.id" 
+            :to="p.link"
+            class="group bg-white rounded-[2rem] border border-[#E7F0E8] p-4 transition-all hover:shadow-2xl hover:shadow-[#13ec25]/10 hover:-translate-y-1 block"
+          >
             <div class="relative aspect-square bg-[#F8FAF8] rounded-[1.5rem] mb-4 overflow-hidden flex items-center justify-center">
               <img :src="p.image" class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-500" />
               <div v-if="p.tag" :class="p.tagColor" class="absolute top-4 left-4 text-[9px] font-black px-2 py-1 rounded-lg uppercase tracking-tighter">{{ p.tag }}</div>
             </div>
             <div class="px-2 space-y-1">
               <p class="text-[10px] font-bold text-[#4c9a52] uppercase">{{ p.brand }}</p>
-              <h3 class="font-bold text-lg group-hover:text-[#13ec25] transition-colors">{{ p.name }}</h3>
+              <h3 class="font-bold text-lg group-hover:text-[#13ec25] transition-colors text-black">{{ p.name }}</h3>
               <div class="flex items-center justify-between pt-3">
-                <span class="text-xl font-black">{{ p.price }} บาท</span>
-                <button class="bg-[#F0F4F0] hover:bg-[#13ec25] text-[#13ec25] hover:text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-sm">
+                <span class="text-xl font-black text-black">{{ p.price }} บาท</span>
+                <button @click.stop.prevent="console.log('Added to cart')" class="bg-[#F0F4F0] hover:bg-[#13ec25] text-[#13ec25] hover:text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-sm">
                   <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
                 </button>
               </div>
             </div>
-          </div>
+          </router-link>
+        </div>
+        
+        <div v-else class="py-20 text-center">
+           <span class="material-symbols-outlined text-6xl text-gray-200">search_off</span>
+           <p class="mt-4 text-gray-500 font-bold">ไม่พบสินค้าที่คุณค้นหา</p>
         </div>
       </section>
     </main>

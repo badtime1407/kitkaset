@@ -3,17 +3,17 @@ import { ref } from 'vue'
 
 // --- State ทั่วไป ---
 const cartCount = ref(3)
+const searchInput = ref('')
 
 // --- State หมวดหมู่ (Categories) ---
 const categories = ref([
   { name: 'ทั้งหมด', icon: 'potted_plant', link: '/Productall' },
   { name: 'สารกำจัดวัชพืช', icon: 'eco', link: '/Product1' },
-  { name: 'สารกำจัดแมลง', icon: 'bug_report', link: '#' },
-  { name: 'สารป้องกันโรค', icon: 'construction', link: '#' }
+  { name: 'สารกำจัดแมลง', icon: 'bug_report', link: '/Product2' },
+  { name: 'สารป้องกันโรค', icon: 'health_and_safety', link: '/Product3' }
 ])
 
-// --- State สินค้า (Products) ---
-// ใช้ข้อมูลและรูปภาพตามที่คุณระบุมา
+// --- State สินค้า (Featured Products) ---
 const products = ref([
   {
     id: 1,
@@ -23,7 +23,7 @@ const products = ref([
     reviews: 120,
     image: 'https://www.qmaxagrotech.com/images/content/original-1685436057325.png',
     badge: { type: 'discount', text: '-15%' },
-    link: '#'
+    link: '/Shoppingcart'
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const products = ref([
     reviews: 85,
     image: 'https://www.qmaxagrotech.com/images/content/original-1727402473253.png',
     badge: null,
-    link: '#'
+    link: '/Shoppingcart'
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const products = ref([
     reviews: 52,
     image: 'https://max-ag.com/wp-content/uploads/2022/02/%E0%B8%AD%E0%B8%B0%E0%B8%9A%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%99.png',
     badge: { type: 'new', text: 'New' },
-    link: '#'
+    link: '/Shoppingcart'
   },
   {
     id: 4,
@@ -53,114 +53,101 @@ const products = ref([
     reviews: 41,
     image: 'https://erawanagri.com/wp-content/uploads/2022/04/erabas-640-240x300.png',
     badge: null,
-    link: '#'
+    link: '/Shoppingcart'
   }
 ])
 
-// --- State จุดเด่นบริการ (Features) - ส่วนล่าง ---
 const features = ref([
-  { 
-    icon: 'local_shipping', 
-    title: 'Safe & Fast Delivery', 
-    sub: 'Directly to your farm gate' 
-  },
-  { 
-    icon: 'verified_user', 
-    title: 'Certified Quality', 
-    sub: '100% Genuine agrochemicals' 
-  },
-  { 
-    icon: 'payments', 
-    title: 'Flexible Payments', 
-    sub: 'Pay on delivery or installments' 
-  }
+  { icon: 'local_shipping', title: 'Safe & Fast Delivery', sub: 'Directly to your farm gate' },
+  { icon: 'verified_user', title: 'Certified Quality', sub: '100% Genuine agrochemicals' },
+  { icon: 'payments', title: 'Flexible Payments', sub: 'Pay on delivery or installments' }
 ])
 
-// ฟังก์ชัน
 const addToCart = (product) => {
   cartCount.value++
-  alert(`เพิ่ม ${product.name} ลงตะกร้าแล้ว!`)
+  // สามารถเปลี่ยน alert เป็น Toast Notification สวยๆ ได้ภายหลัง
+  console.log(`Added ${product.name} to cart`)
 }
 </script>
 
 <template>
   <div class="min-h-screen bg-[#f9f9f9] font-main text-[#0d1b0f]">
     
-    <header class="sticky top-0 z-50 flex items-center justify-between py-3 px-6 w-full bg-white shadow-sm border-b border-gray-100">
-      <div class="flex items-center gap-3 shrink-0 cursor-pointer">
+    <header class="sticky top-0 z-50 flex items-center justify-between py-3 px-6 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
+      <router-link to="/" class="flex items-center gap-3 shrink-0 cursor-pointer">
         <div class="text-[#1ED730] size-8">
           <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
              <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
           </svg>
         </div>
         <h2 class="text-xl font-extrabold leading-tight tracking-tight hidden sm:block text-black">กิจเกษตร</h2>
-      </div>
+      </router-link>
 
       <div class="flex-1 max-w-xl mx-4 lg:mx-8">
-        <label class="flex flex-col min-w-40 h-10 w-full">
-          <div class="flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden bg-[#eff7f0]"> 
-            <div class="text-[#4c9a52] flex items-center justify-center pl-4">
-              <span class="material-symbols-outlined">search</span>
-            </div>
-            <input class="w-full border-none bg-transparent text-gray-700 focus:ring-0 px-3 text-sm placeholder:text-[#8abf90]" placeholder="Search for pesticides, fertilizers, or tools..." />
+        <div class="flex w-full h-10 items-stretch rounded-lg overflow-hidden bg-[#eff7f0]"> 
+          <div class="text-[#4c9a52] flex items-center justify-center pl-4">
+            <span class="material-symbols-outlined">search</span>
           </div>
-        </label>
+          <input 
+            v-model="searchInput"
+            class="w-full border-none bg-transparent text-gray-700 focus:ring-0 px-3 text-sm placeholder:text-[#8abf90]" 
+            placeholder="ค้นหายาฆ่าแมลง ปุ๋ย หรืออุปกรณ์..." 
+          />
+        </div>
       </div>
 
       <div class="flex items-center gap-3 shrink-0">
         <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#eff7f0] text-black hover:bg-[#dcefe0] transition">
           <span class="material-symbols-outlined">person</span>
         </button>
-        <div class="relative">
+        <router-link to="/Shoppingcart" class="relative">
           <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#eff7f0] text-black hover:bg-[#dcefe0] transition">
             <span class="material-symbols-outlined">shopping_cart</span>
           </button>
-          <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1ED730] text-[10px] font-bold text-white border-2 border-white">{{ cartCount }}</span>
-        </div>
+          <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1ED730] text-[10px] font-bold text-white border-2 border-white">
+            {{ cartCount }}
+          </span>
+        </router-link>
       </div>
     </header>
 
     <main class="max-w-[1280px] mx-auto px-4 md:px-10 lg:px-40 py-8 space-y-12">
       
-      <section class="@container">
-        <div class="relative overflow-hidden rounded-2xl shadow-md group cursor-pointer">
-          <div class="flex min-h-[300px] md:min-h-[400px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-start justify-end px-6 pb-12 transition-transform duration-700 group-hover:scale-105"
-               style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%), url('/Background.png');">  
+      <section>
+        <div class="relative overflow-hidden rounded-2xl shadow-md group cursor-pointer h-[300px] md:h-[400px]">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+               style="background-image: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%), url('/Background.png');">
+          </div>
+          <div class="relative h-full flex flex-col justify-end p-8">
+             <h1 class="text-3xl md:text-5xl font-black text-white mb-2">ยกระดับผลผลิตเกษตรไทย</h1>
+             <p class="text-white/90 text-sm md:text-base max-w-lg">รวมสินค้าคุณภาพเยี่ยมจากผู้เชี่ยวชาญ ส่งตรงถึงมือคุณ</p>
           </div>
         </div>
       </section>
 
       <section>
         <div class="flex items-center justify-between mb-6">
-          <h2 class="text-xl font-bold tracking-tight text-gray-900">Browse by Category</h2>
-          <a class="text-sm font-bold text-[#1ED730] hover:underline" href="#">View All</a>
+          <h2 class="text-xl font-bold tracking-tight text-gray-900">ค้นหาตามหมวดหมู่</h2>
+          <router-link to="/Productall" class="text-sm font-bold text-[#1ED730] hover:underline">ดูทั้งหมด</router-link>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <a v-for="(cat, index) in categories" :key="index" :href="cat.link"
-             class="flex flex-col gap-3 rounded-xl border border-gray-100 bg-white p-6 items-center text-center hover:shadow-lg hover:border-[#cfe7d1] transition-all cursor-pointer group">
+          <router-link v-for="(cat, index) in categories" :key="index" :to="cat.link"
+             class="flex flex-col gap-3 rounded-xl border border-gray-100 bg-white p-6 items-center text-center hover:shadow-lg hover:border-[#cfe7d1] transition-all group">
             <div class="bg-[#e7f3e8] p-4 rounded-full text-[#1ED730] group-hover:scale-110 group-hover:bg-[#1ED730] group-hover:text-white transition-all duration-300">
               <span class="material-symbols-outlined !text-3xl">{{ cat.icon }}</span>
             </div>
             <h3 class="font-bold text-sm text-gray-700 group-hover:text-black">{{ cat.name }}</h3>
-          </a>
+          </router-link>
         </div>
       </section>
 
       <section>
         <div class="flex items-center justify-between mb-6">
-          <h2 class="text-xl font-bold tracking-tight text-gray-900">Featured Products</h2>
-          <div class="flex gap-2">
-            <button class="size-8 flex items-center justify-center rounded-full border border-gray-200 hover:bg-gray-100 transition">
-              <span class="material-symbols-outlined !text-lg">chevron_left</span>
-            </button>
-            <button class="size-8 flex items-center justify-center rounded-full border border-gray-200 hover:bg-gray-100 transition">
-              <span class="material-symbols-outlined !text-lg">chevron_right</span>
-            </button>
-          </div>
+          <h2 class="text-xl font-bold tracking-tight text-gray-900">สินค้าแนะนำ</h2>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <a v-for="product in products" :key="product.id" :href="product.link"
+          <router-link v-for="product in products" :key="product.id" :to="product.link"
              class="group flex flex-col bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-[#1ED730] transition-all duration-300">
             
             <div class="relative aspect-[4/5] w-full overflow-hidden bg-[#f9f9f9] p-4">
@@ -186,7 +173,7 @@ const addToCart = (product) => {
               </div>
               
               <div class="mt-auto flex items-center justify-between">
-                <span class="text-lg font-black text-gray-900">฿{{ product.price }} บาท</span>
+                <span class="text-lg font-black text-gray-900">฿{{ product.price }}</span>
                 <button 
                   class="size-10 flex items-center justify-center bg-[#1ED730] text-black rounded-lg hover:bg-[#18b528] hover:shadow-lg active:scale-95 transition-all z-10" 
                   @click.prevent="addToCart(product)">
@@ -194,39 +181,35 @@ const addToCart = (product) => {
                 </button>
               </div>
             </div>
-          </a>
+          </router-link>
         </div>
       </section>
 
-     <section class="bg-[#1a2e1c] rounded-2xl overflow-hidden relative shadow-lg mt-12">
-    <div class="flex flex-col md:flex-row items-stretch min-h-[320px]">
-      
-      <div class="flex-1 p-8 md:p-12 z-10 relative flex flex-col justify-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">ต้องการคำแนะนำจากผู้เชี่ยวชาญไหม?</h2>
-        <p class="text-white/80 mb-8 max-w-md leading-relaxed">
-         นักเกษตรผู้เชี่ยวชาญของเราที่ได้รับการรับรองพร้อมให้บริการตลอด 24 ชั่วโมง เพื่อช่วยคุณวินิจฉัยโรคพืชและแนะนำผลิตภัณฑ์ที่เหมาะสมกับประเภทดินของคุณ
-        </p>
-        <div>
-            <button class="flex items-center gap-2 bg-[#1ED730] text-[#0d1b0f] font-bold px-6 py-3 rounded-lg hover:bg-[#18b528] transition-all shadow-md active:scale-95">
-            <span class="material-symbols-outlined">support_agent</span>
-            Book Consultation
-            </button>
+      <section class="bg-[#1a2e1c] rounded-2xl overflow-hidden relative shadow-lg mt-12">
+        <div class="flex flex-col md:flex-row items-stretch min-h-[320px]">
+          <div class="flex-1 p-8 md:p-12 z-10 relative flex flex-col justify-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">ต้องการคำแนะนำไหม?</h2>
+            <p class="text-white/80 mb-8 max-w-md leading-relaxed">
+              ผู้เชี่ยวชาญเกษตรของเราพร้อมวินิจฉัยโรคพืชและแนะนำผลิตภัณฑ์ที่แม่นยำให้คุณฟรี
+            </p>
+            <div>
+              <router-link to="/consultation">
+                <button class="flex items-center gap-2 bg-[#1ED730] text-[#0d1b0f] font-bold px-6 py-3 rounded-lg hover:bg-[#18b528] transition-all shadow-md active:scale-95">
+                  <span class="material-symbols-outlined">support_agent</span>
+                  คุยกับผู้เชี่ยวชาญ
+                </button>
+              </router-link>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 relative min-h-[320px] md:min-h-full">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#1a2e1c] via-[#1a2e1c]/60 to-transparent z-10"></div>
+            <img class="w-full h-full object-cover object-center" src="/ER1.png" alt="Agronomist" />
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="w-full md:w-1/2 relative min-h-[320px] md:min-h-full">
-        <div class="absolute inset-0 bg-gradient-to-r from-[#1a2e1c] via-[#1a2e1c]/60 to-transparent z-10 pointer-events-none"></div>
-        <img 
-          class="w-full h-full object-cover object-center z-0 relative" 
-          src="/ER1.png" 
-          alt="Agronomist with tablet" 
-        />
-      </div>
-    </div>
-</section>
-
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-8 py-6 px-4">
-        <div v-for="(feature, index) in features" :key="index" class="flex items-start gap-4">
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-8 py-6 border-b border-gray-100">
+        <div v-for="(feature, index) in features" :key="index" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white transition-colors">
           <div class="text-[#1ED730]">
             <span class="material-symbols-outlined !text-4xl">{{ feature.icon }}</span>
           </div>
@@ -236,72 +219,57 @@ const addToCart = (product) => {
           </div>
         </div>
       </section>
-
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-12 px-4 md:px-10 lg:px-40 mt-12">
-      <div class="max-w-[1280px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
-         
-         <div class="space-y-4">
-             <div class="flex items-center gap-2">
-                 <div class="text-[#1ED730] size-6">
-                     <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
-                     </svg>
-                 </div>
-                 <h2 class="text-lg font-bold text-gray-900">AgroConsult</h2>
-             </div>
-             <p class="text-xs text-gray-500 leading-relaxed">Leading the way in modern agriculture with technology and trust.</p>
-         </div>
-
-         <div>
-            <h4 class="font-bold text-sm mb-4 text-gray-900">Shop</h4>
-            <ul class="text-xs space-y-3 text-gray-500">
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Pesticides</a></li>
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Fertilizers</a></li>
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Seeds</a></li>
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Farm Tools</a></li>
-            </ul>
-         </div>
-
-         <div>
-            <h4 class="font-bold text-sm mb-4 text-gray-900">Services</h4>
-            <ul class="text-xs space-y-3 text-gray-500">
-                <li><a class="hover:text-[#1ED730] transition-colors" href="">Expert Consultation</a></li>
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Soil Testing</a></li>
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Bulk Ordering</a></li>
-                <li><a class="hover:text-[#1ED730] transition-colors" href="#">Weather Reports</a></li>
-            </ul>
-         </div>
-
-         <div>
-             <h4 class="font-bold text-sm mb-4 text-gray-900">Newsletter</h4>
-             <p class="text-xs text-gray-500 mb-4">Get seasonal tips and exclusive discounts.</p>
-             <div class="flex gap-2">
-                 <input class="flex-1 rounded-lg border border-gray-200 bg-gray-50 text-xs px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1ED730]" placeholder="Email address" type="email" />
-                 <button class="bg-[#1ED730] text-[#0d1b0f] px-4 py-2 rounded-lg font-bold text-xs hover:bg-[#18b528] transition-colors">Join</button>
-             </div>
-         </div>
+    <footer class="bg-white border-t border-gray-100 py-12 px-6 md:px-10 lg:px-40 mt-12">
+      <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="text-[#1ED730] size-6">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-lg font-bold text-gray-900">กิจเกษตร</h2>
+          </div>
+          <p class="text-xs text-gray-500 leading-relaxed">ผู้นำด้านเทคโนโลยีการเกษตรสมัยใหม่ ที่ได้รับความไว้วางใจจากเกษตรกรไทย</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm mb-4 text-gray-900">หมวดหมู่สินค้า</h4>
+          <ul class="text-xs space-y-3 text-gray-500">
+            <li><router-link to="/Product1" class="hover:text-[#1ED730]">สารกำจัดวัชพืช</router-link></li>
+            <li><router-link to="/Product2" class="hover:text-[#1ED730]">สารกำจัดแมลง</router-link></li>
+            <li><router-link to="/Product3" class="hover:text-[#1ED730]">สารป้องกันโรคพืช</router-link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm mb-4 text-gray-900">การบริการ</h4>
+          <ul class="text-xs space-y-3 text-gray-500">
+            <li><router-link to="/consultation" class="hover:text-[#1ED730]">ปรึกษาผู้เชี่ยวชาญ</router-link></li>
+            <li><a href="#" class="hover:text-[#1ED730]">ติดตามสถานะการส่ง</a></li>
+            <li><a href="#" class="hover:text-[#1ED730]">นโยบายการคืนเงิน</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm mb-4 text-gray-900">รับข่าวสารและส่วนลด</h4>
+          <div class="flex gap-2">
+            <input class="flex-1 rounded-lg border border-gray-200 bg-gray-50 text-xs px-3 py-2 focus:ring-2 focus:ring-[#1ED730] outline-none" placeholder="อีเมลของคุณ" type="email" />
+            <button class="bg-[#1ED730] text-[#0d1b0f] px-4 py-2 rounded-lg font-bold text-xs hover:bg-[#18b528]">ส่ง</button>
+          </div>
+        </div>
       </div>
-
-      <div class="max-w-[1280px] mx-auto mt-12 pt-8 border-t border-gray-100 text-center">
-          <p class="text-[10px] text-gray-400">© 2024 AgroConsult E-Commerce. All rights reserved.</p>
+      <div class="max-w-[1280px] mx-auto mt-12 pt-8 border-t border-gray-100 text-center text-[10px] text-gray-400">
+        © 2026 Kij Kaset Co., Ltd. All rights reserved.
       </div>
     </footer>
   </div>
 </template>
 
 <style scoped>
-/* นำเข้า Font ไทยและอังกฤษ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;700;800&display=swap');
-/* นำเข้า Material Symbols (ไอคอน) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Sarabun:wght@400;500;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-.font-main {
-  font-family: 'Inter', 'Sarabun', sans-serif;
-}
-
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
+.font-main { font-family: 'Inter', 'Sarabun', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.fill-1 { font-variation-settings: 'FILL' 1; }
 </style>
