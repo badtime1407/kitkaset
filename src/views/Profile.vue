@@ -99,7 +99,7 @@ const savePreferences = () => {
           <div class="p-12 lg:p-20">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 mb-20">
               <div v-for="(label, key) in {fullName: 'ชื่อ-นามสกุล', phone: 'หมายเลขโทรศัพท์', email: 'อีเมล', dob: 'วันเกิด'}" :key="key" class="flex flex-col gap-4">
-                <label class="text-[#1A3128] text-base font-black ml-1 opacity-90 uppercase tracking-widest text-xs">{{ label }}</label>
+                <label class="text-[#1A3128] text-base font-black ml-1 opacity-90 uppercase tracking-widest ">{{ label }}</label>
                 <input 
                   v-model="userProfile[key]" 
                   :type="key === 'email' ? 'email' : key === 'dob' ? 'date' : 'text'"
