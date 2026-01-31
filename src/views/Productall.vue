@@ -7,7 +7,6 @@ const selectedCategory = ref('ทั้งหมด');
 const selectedBrands = ref(['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva Agriscience']);
 
 // --- Data ---
-// เพิ่ม property "link" ให้กับสินค้าแต่ละชิ้น
 const products = ref([
     { 
       id: 1, 
@@ -17,7 +16,7 @@ const products = ref([
       tag: 'Top Rated',
       tagColor: 'bg-[#13ec25] text-black',
       brand: 'Bayer Crop Science',
-      link: '/Shoppingcart' // ระบุ path ที่ต้องการให้ไป
+      link: '/Shoppingcart'
     },
     { 
       id: 2,
@@ -86,34 +85,36 @@ const brands = ['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva 
 
 const navItems = [
   { name: 'สารเคมีเกษตร', link: '/', active: true },
-  { name: 'การปรึกษา', link: '/consultation', active: false },
-  { name: 'อุปกรณ์เกษตร', link: '/equipment', active: false },
-  { name: 'เกี่ยวกับเรา', link: '/about', active: false }
+  { name: 'การปรึกษา', link: '/', active: false },
+  { name: 'อุปกรณ์เกษตร', link: '/', active: false },
+  { name: 'เกี่ยวกับเรา', link: '/', active: false }
 ];
 </script>
 
 <template>
   <div class="min-h-screen bg-[#f9f9f9] font-main text-[#0d1b0f]">
     <header class="sticky top-0 z-50 flex items-center justify-between py-3 px-4 md:px-10 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
-      <div class="flex items-center gap-3 shrink-0 cursor-pointer group">
+      <router-link to="/" class="flex items-center gap-3 shrink-0 cursor-pointer group">
         <div class="text-[#010101] size-9 transition-transform group-hover:rotate-12">
           <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
           </svg>
         </div>
-        <h2 class="text-xl font-black leading-tight tracking-tighter text-black">กิจเกษตร</h2>
-        
-        <nav class="hidden md:flex gap-8 ml-6 text-sm font-bold text-gray-500">
-          <router-link v-for="item in navItems" :key="item.name" :to="item.link" class="hover:text-black transition-colors" :class="{'text-black border-b-2 border-[#13ec25]': item.active}">
-            {{ item.name }}
-          </router-link>
-        </nav>
-      </div>
+        <h2 class="text-xl font-black text-black">กิจเกษตร</h2>
+      </router-link>
+      
+      <nav class="hidden md:flex gap-8 ml-6 text-sm font-bold text-gray-500">
+        <router-link v-for="item in navItems" :key="item.name" :to="item.link" class="hover:text-black transition-colors" :class="{'text-black border-b-2 border-[#13ec25]': item.active}">
+          {{ item.name }}
+        </router-link>
+      </nav>
 
       <div class="flex items-center gap-4 flex-1 max-w-md justify-end">
         <div class="flex gap-2">
-          <router-link to="/Shoppingcart" class="p-2 text-gray-600 hover:text-[#1ED730]"><span class="material-symbols-outlined">shopping_cart</span></router-link>
-          <button class="p-2 text-gray-600 hover:text-[#1ED730]"><span class="material-symbols-outlined">person</span></button>
+          <router-link to="/Shoppingcart" class="p-2 text-gray-600 hover:text-[#13ec25]">
+            <span class="material-symbols-outlined">shopping_cart</span>
+          </router-link>
+          <router-link to="Profile" class="p-2 text-gray-600 hover:text-[#13ec25]"><span class="material-symbols-outlined">person</span></router-link>
         </div>
       </div>
     </header>
@@ -173,7 +174,7 @@ const navItems = [
             v-for="p in filteredProducts" 
             :key="p.id" 
             :to="p.link"
-            class="group bg-white rounded-[2rem] border border-[#E7F0E8] p-4 transition-all hover:shadow-2xl hover:shadow-[#13ec25]/10 hover:-translate-y-1 block"
+            class="group bg-white rounded-[2rem] border border-[#E7F0E8] p-4 transition-all hover:shadow-2xl hover:shadow-[#13ec25]/10 hover:-translate-y-1 block cursor-pointer"
           >
             <div class="relative aspect-square bg-[#F8FAF8] rounded-[1.5rem] mb-4 overflow-hidden flex items-center justify-center">
               <img :src="p.image" class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-500" />
@@ -191,12 +192,42 @@ const navItems = [
             </div>
           </router-link>
         </div>
-        
-        <div v-else class="py-20 text-center">
-           <span class="material-symbols-outlined text-6xl text-gray-200">search_off</span>
-           <p class="mt-4 text-gray-500 font-bold">ไม่พบสินค้าที่คุณค้นหา</p>
+
+        <div class="flex items-center justify-center gap-2 mt-12 pb-12">
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg bg-[#13ec25] text-black font-bold shadow-md">1</button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">2</button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">3</button>
+            <span class="px-2 text-gray-400">...</span>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">7</button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
         </div>
       </section>
     </main>
+
+    <footer class="bg-white border-t border-[#e7f3e8] py-12 px-10">
+        <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+                <h4 class="text-xl font-bold mb-2">Grow smarter with our expert tips</h4>
+                <p class="text-gray-500">Join our newsletter for weekly agrochemical guides and market trends.</p>
+            </div>
+            <div class="flex w-full max-w-md gap-3">
+                <input class="flex-1 rounded-lg border-gray-300 bg-transparent focus:ring-[#13ec25] focus:border-[#13ec25]" placeholder="Your farm email" type="email" />
+                <button class="px-6 py-2 bg-[#13ec25] text-black font-bold rounded-lg hover:opacity-90 transition-opacity">Subscribe</button>
+            </div>
+        </div>
+        <div class="max-w-[1440px] mx-auto mt-12 pt-8 border-t border-[#e7f3e8] flex flex-col md:flex-row justify-between text-xs text-gray-400 gap-4">
+            <p>© 2024 กิจเกษตร (AgroConsult). All rights reserved for global farmers.</p>
+            <div class="flex gap-6">
+                <a class="hover:text-[#13ec25]" href="#">Terms of Service</a>
+                <a class="hover:text-[#13ec25]" href="#">Privacy Policy</a>
+                <a class="hover:text-[#13ec25]" href="#">Consultation Terms</a>
+            </div>
+        </div>
+    </footer>
   </div>
 </template>

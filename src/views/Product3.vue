@@ -15,7 +15,7 @@ const products = ref([
       tag: 'Top Rated',
       tagColor: 'bg-[#13ec25] text-black',
       brand: 'Bayer Crop Science',
-      link: '/Shoppingcart' // ลิงก์ปลายทาง
+      link: '/Shoppingcart'
     },
     { 
       id: 2, name: 'คิวโทมอร์ฟ',
@@ -79,9 +79,9 @@ const brands = ['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva 
 
 const navItems = [
   { name: 'สารเคมีเกษตร', link: '/', active: true },
-  { name: 'การปรึกษา', link: '/consultation', active: false },
-  { name: 'อุปกรณ์เกษตร', link: '/equipment', active: false },
-  { name: 'เกี่ยวกับเรา', link: '/about', active: false }
+  { name: 'การปรึกษา', link: '/', active: false },
+  { name: 'อุปกรณ์เกษตร', link: '/', active: false },
+  { name: 'เกี่ยวกับเรา', link: '/', active: false }
 ];
 </script>
 
@@ -96,7 +96,7 @@ const navItems = [
         </div>
         <h2 class="text-xl font-black text-black">กิจเกษตร</h2>
       </router-link>
-        
+      
       <nav class="hidden md:flex gap-8 ml-6 text-sm font-bold text-gray-500">
         <router-link v-for="item in navItems" :key="item.name" :to="item.link" class="hover:text-black transition-colors" :class="{'text-black border-b-2 border-[#13ec25]': item.active}">
           {{ item.name }}
@@ -108,7 +108,7 @@ const navItems = [
           <router-link to="/Shoppingcart" class="p-2 text-gray-600 hover:text-[#13ec25]">
             <span class="material-symbols-outlined">shopping_cart</span>
           </router-link>
-          <button class="p-2 text-gray-600 hover:text-[#13ec25]"><span class="material-symbols-outlined">person</span></button>
+          <router-link to="/Profile" class="p-2 text-gray-600 hover:text-[#13ec25] transition-colors"><span class="material-symbols-outlined">person</span></router-link>
         </div>
       </div>
     </header>
@@ -186,7 +186,46 @@ const navItems = [
             </div>
           </router-link>
         </div>
+
+        <div class="flex items-center justify-center gap-2 mt-12">
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg bg-[#13ec25] text-black font-bold shadow-sm">1</button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">2</button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">3</button>
+            <span class="px-2 text-gray-400">...</span>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">7</button>
+            <button class="flex items-center justify-center h-10 w-10 rounded-lg border border-[#e7f3e8] hover:bg-[#13ec25]/10 transition-colors">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </div>
       </section>
     </main>
+
+    <footer class="bg-white border-t border-[#e7f3e8] mt-20 py-12 px-10">
+        <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="text-center md:text-left">
+                <h4 class="text-xl font-bold mb-2">Grow smarter with our expert tips</h4>
+                <p class="text-gray-500">Join our newsletter for weekly agrochemical guides and market trends.</p>
+            </div>
+            <div class="flex w-full max-w-md gap-3">
+                <input
+                    class="flex-1 rounded-lg border-gray-300 bg-transparent focus:ring-[#13ec25] focus:border-[#13ec25] px-4 py-2"
+                    placeholder="Your farm email" type="email" />
+                <button
+                    class="px-6 py-2 bg-[#13ec25] text-black font-bold rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">Subscribe</button>
+            </div>
+        </div>
+        
+        <div class="max-w-[1440px] mx-auto mt-12 pt-8 border-t border-[#e7f3e8] flex flex-col md:flex-row justify-between text-xs text-gray-400 gap-4">
+            <p>© 2026 กิจเกษตร (AgroConsult). All rights reserved for global farmers.</p>
+            <div class="flex gap-6">
+                <a class="hover:text-[#13ec25] transition-colors" href="#">Terms of Service</a>
+                <a class="hover:text-[#13ec25] transition-colors" href="#">Privacy Policy</a>
+                <a class="hover:text-[#13ec25] transition-colors" href="#">Consultation Terms</a>
+            </div>
+        </div>
+    </footer>
   </div>
 </template>
