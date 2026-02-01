@@ -1,21 +1,30 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
+
+// ข้อมูลโปรไฟล์ผู้ใช้
 const userProfile = reactive({
   fullName: 'Johnathan Appleseed',
   phone: '+1 (555) 123-4567',
   email: 'j.appleseed@agrifarm.com',
   dob: '1985-05-12',
-  avatar:'https://cdn-icons-png.freepik.com/512/10130/10130567.png' 
+  avatar: 'https://cdn-icons-png.freepik.com/512/10130/10130567.png' 
 })
 
+// ข้อมูลเมนูนำทาง (ใช้ path ในการเช็ก active)
 const navigationItems = [
-  { name: 'My Profile', icon: 'person', active: true },
-  { name: 'Address Book', icon: 'location_on', active: false },
-  { name: 'Order History', icon: 'inventory_2', active: false },
-  { name: 'Account Settings', icon: 'settings', active: false },
+  { name: 'My Profile', icon: 'person', path: '/profile' },
+  { name: 'Address Book', icon: 'location_on', path: '/' },
+  { name: 'Order History', icon: 'inventory_2', path: '/' },
+  { name: 'Account Settings', icon: 'settings', path: '/' },
 ]
 
+// ฟังก์ชันเช็กว่า Path ปัจจุบันตรงกับเมนูไหน
+const isActive = (path) => route.path === path
+
+// ข้อมูลตัวเลือกพืชผล
 const cropOptions = ref([
   { id: 'rice', name: 'Rice', icon: 'eco', selected: true },
   { id: 'sugarcane', name: 'Sugarcane', icon: 'grass', selected: true },
@@ -25,17 +34,18 @@ const cropOptions = ref([
 ])
 
 const savePreferences = () => {
-  alert('บันทึกข้อมูลส่วนตัวสำเร็จ! 🌱')
+  const selectedCrops = cropOptions.value.filter(c => c.selected).map(c => c.name)
+  alert(`บันทึกข้อมูลเรียบร้อยแล้ว!\nพืชที่เลือก: ${selectedCrops.join(', ')}`)
 }
 </script>
 
 <template>
   <div class="flex min-h-screen w-full bg-[#F8F9F8] font-sans">
     
-    <aside class="w-56 bg-white hidden lg:flex flex-col border-r border-gray-100 sticky top-0 h-screen">
+    <aside class="w-64 bg-white hidden lg:flex flex-col border-r border-gray-100 sticky top-0 h-screen">
       <div class="p-6 flex flex-col h-full">
         
-        <router-link to="/" class="flex items-center gap-3 mb-10 px-2 group hover:opacity-80 transition-all decoration-none">
+        <router-link to="/" class="flex items-center gap-3 mb-10 px-2 group hover:opacity-80 transition-all no-underline">
           <div class="bg-[#00D632] p-2 rounded-xl group-hover:rotate-12 transition-transform duration-300">
             <span class="material-symbols-outlined text-white text-xl">agriculture</span>
           </div>
@@ -46,16 +56,20 @@ const savePreferences = () => {
         </router-link>
 
         <nav class="flex flex-col gap-1.5 grow">
-          <a v-for="item in navigationItems" :key="item.name" href="#" 
-             :class="['flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all font-bold text-sm', 
-             item.active ? 'bg-[#EBF9F1] text-[#1A3128]' : 'text-gray-400 hover:bg-gray-50']">
+          <router-link 
+            v-for="item in navigationItems" 
+            :key="item.name" 
+            :to="item.path"
+            :class="['flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all font-bold text-sm no-underline', 
+            isActive(item.path) ? 'bg-[#EBF9F1] text-[#00D632]' : 'text-gray-400 hover:bg-gray-50']"
+          >
             <span class="material-symbols-outlined text-[22px]">{{ item.icon }}</span>
             <span>{{ item.name }}</span>
-          </a>
+          </router-link>
         </nav>
 
         <div class="pt-4 border-t border-gray-50">
-          <router-link to="/Login" class="flex items-center gap-3.5 px-4 py-3.5 text-rose-500 hover:bg-rose-50 rounded-2xl transition-all font-bold text-sm">
+          <router-link to="/Login" class="flex items-center gap-3.5 px-4 py-3.5 text-rose-500 hover:bg-rose-50 rounded-2xl transition-all font-bold text-sm no-underline">
             <span class="material-symbols-outlined text-[22px]">logout</span>
             <span>Logout</span>
           </router-link>
@@ -164,7 +178,12 @@ const savePreferences = () => {
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: #1A3128;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
+}
+
+.no-underline {
+  text-decoration: none;
 }
 
 ::-webkit-scrollbar { width: 10px; }
