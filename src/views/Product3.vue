@@ -1,5 +1,19 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { useCartStore } from "@/stores/cart";
+
+const cart = useCartStore();
+
+function addToCart(p) {
+  cart.addToCart({
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    image: p.image,
+  });
+
+  console.log("Added to cart", p.name);
+}
 
 // --- State ---
 const searchQuery = ref('');
@@ -83,6 +97,7 @@ const navItems = [
   { name: 'อุปกรณ์เกษตร', link: '/', active: false },
   { name: 'เกี่ยวกับเรา', link: '/', active: false }
 ];
+
 </script>
 
 <template>
@@ -105,8 +120,13 @@ const navItems = [
 
       <div class="flex items-center gap-4 flex-1 max-w-md justify-end">
         <div class="flex gap-2">
-          <router-link to="/Shoppingcart" class="p-2 text-gray-600 hover:text-[#13ec25]">
-            <span class="material-symbols-outlined">shopping_cart</span>
+          <router-link to="/Shoppingcart" class="relative p-2">
+            <span class="material-symbols-outlined">
+              shopping_cart
+            </span>
+            <span v-if="cart.totalQty > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
+              {{ cart.totalQty }}
+            </span>
           </router-link>
           <router-link to="/Profile" class="p-2 text-gray-600 hover:text-[#13ec25] transition-colors"><span class="material-symbols-outlined">person</span></router-link>
         </div>
@@ -179,7 +199,7 @@ const navItems = [
               <h3 class="font-bold text-lg group-hover:text-[#13ec25] transition-colors text-black">{{ p.name }}</h3>
               <div class="flex items-center justify-between pt-3">
                 <span class="text-xl font-black text-black">{{ p.price }} บาท</span>
-                <button @click.stop.prevent="console.log('Added to cart')" class="bg-[#F0F4F0] hover:bg-[#13ec25] text-[#13ec25] hover:text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-sm">
+                <button @click.stop.prevent="addToCart(p)" class="bg-[#F0F4F0] hover:bg-[#13ec25] text-[#13ec25] hover:text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-sm">
                   <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
                 </button>
               </div>

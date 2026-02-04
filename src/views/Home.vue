@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+import { useCartStore } from '@/stores/cart'
+
+const cart = useCartStore()
 
 // --- State ทั่วไป ---
-const cartCount = ref(3)
 const searchInput = ref('')
 
 // --- State หมวดหมู่ (Categories) ---
@@ -64,9 +66,7 @@ const features = ref([
 ])
 
 const addToCart = (product) => {
-  cartCount.value++
-  // สามารถเปลี่ยน alert เป็น Toast Notification สวยๆ ได้ภายหลัง
-  console.log(`Added ${product.name} to cart`)
+  cart.addToCart(product)
 }
 </script>
 
@@ -101,8 +101,8 @@ const addToCart = (product) => {
     <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#eff7f0] text-black hover:bg-[#dcefe0] transition">
       <span class="material-symbols-outlined">shopping_cart</span>
     </button>
-    <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1ED730] text-[10px] font-bold text-white border-2 border-white">
-      {{ cartCount }}
+    <span v-if="cart.totalQty > 0" 
+      class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1ED730] text-[10px] font-bold text-white border-2 border-white">{{ cart.totalQty }}
     </span>
   </router-link>
 
