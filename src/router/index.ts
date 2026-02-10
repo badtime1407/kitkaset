@@ -9,6 +9,13 @@ import Product2 from '../views/Product2.vue'
 import Product3 from '../views/Product3.vue'
 import ShoppingCart from '../views/Shoppingcart.vue'
 import Profile from '../views/profile.vue'
+import Setting from '../views/setting.vue'
+import Address from '../views/address.vue'
+import Order from '../views/order.vue'
+import Payment from '../views/payment.vue'
+import Chat from '../views/Chat.vue'
+import Productdetails from '../views/Productdetails.vue'
+import Advicecenter from '../views/Advicecenter.vue'
 
 
 const routes = [
@@ -22,7 +29,13 @@ const routes = [
   { path: '/product3' , component: Product3},
   { path: '/shoppingcart' , component: ShoppingCart},
   { path: '/profile' , component : Profile},
- 
+  { path: '/address' , component : Address},
+  { path: '/order', component : Order},
+  { path: '/setting', component : Setting},
+  { path: '/payment', component : Payment},
+  { path : '/chat' , component : Chat},
+  { path : '/Productdetails' , component : Productdetails},
+  { path : '/Advicecenter', component : Advicecenter}
 ]
 
 const router = createRouter({
