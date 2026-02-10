@@ -16,9 +16,9 @@ const userProfile = reactive({
 // ข้อมูลเมนูนำทาง (ใช้ path ในการเช็ก active)
 const navigationItems = [
   { name: 'My Profile', icon: 'person', path: '/profile' },
-  { name: 'Address Book', icon: 'location_on', path: '/' },
-  { name: 'Order History', icon: 'inventory_2', path: '/' },
-  { name: 'Account Settings', icon: 'settings', path: '/' },
+  { name: 'Address Book', icon: 'location_on', path: '/Address' },
+  { name: 'Order History', icon: 'inventory_2', path: '/Order' },
+  { name: 'Account Settings', icon: 'settings', path: '/Setting' },
 ]
 
 // ฟังก์ชันเช็กว่า Path ปัจจุบันตรงกับเมนูไหน
