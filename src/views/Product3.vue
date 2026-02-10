@@ -223,29 +223,6 @@ const navItems = [
       </section>
     </main>
 
-    <footer class="bg-white border-t border-[#e7f3e8] mt-20 py-12 px-10">
-        <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="text-center md:text-left">
-                <h4 class="text-xl font-bold mb-2">Grow smarter with our expert tips</h4>
-                <p class="text-gray-500">Join our newsletter for weekly agrochemical guides and market trends.</p>
-            </div>
-            <div class="flex w-full max-w-md gap-3">
-                <input
-                    class="flex-1 rounded-lg border-gray-300 bg-transparent focus:ring-[#13ec25] focus:border-[#13ec25] px-4 py-2"
-                    placeholder="Your farm email" type="email" />
-                <button
-                    class="px-6 py-2 bg-[#13ec25] text-black font-bold rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">Subscribe</button>
-            </div>
-        </div>
-        
-        <div class="max-w-[1440px] mx-auto mt-12 pt-8 border-t border-[#e7f3e8] flex flex-col md:flex-row justify-between text-xs text-gray-400 gap-4">
-            <p>© 2026 กิจเกษตร (AgroConsult). All rights reserved for global farmers.</p>
-            <div class="flex gap-6">
-                <a class="hover:text-[#13ec25] transition-colors" href="#">Terms of Service</a>
-                <a class="hover:text-[#13ec25] transition-colors" href="#">Privacy Policy</a>
-                <a class="hover:text-[#13ec25] transition-colors" href="#">Consultation Terms</a>
-            </div>
-        </div>
-    </footer>
+  <Footer />
   </div>
 </template>
