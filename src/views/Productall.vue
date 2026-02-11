@@ -99,6 +99,34 @@ const categories = ref([
 
 const brands = ['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva Agriscience'];
 
+/* ===== Popup Confirm ===== */
+
+const showConfirm = ref(false)
+const selectedProduct = ref(null)
+
+function openConfirm(p) {
+  selectedProduct.value = p
+  showConfirm.value = true
+}
+
+function closeConfirm() {
+  showConfirm.value = false
+  selectedProduct.value = null
+}
+
+function confirmAddToCart() {
+  if (!selectedProduct.value) return
+
+  cart.addToCart({
+    id: selectedProduct.value.id,
+    name: selectedProduct.value.name,
+    price: selectedProduct.value.price,
+    image: selectedProduct.value.image,
+  })
+
+  closeConfirm()
+}
+
 </script>
 
 <template>
@@ -171,7 +199,7 @@ const brands = ['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva 
               <h3 class="font-bold text-lg group-hover:text-[#13ec25] transition-colors text-black">{{ p.name }}</h3>
               <div class="flex items-center justify-between pt-3">
                 <span class="text-xl font-black text-black">{{ p.price }} บาท</span>
-                <button @click.stop.prevent="addToCart(p)" class="bg-[#F0F4F0] hover:bg-[#13ec25] text-[#13ec25] hover:text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-sm">
+                <button @click.stop.prevent="openConfirm(p)" class="bg-[#F0F4F0] hover:bg-[#13ec25] text-[#13ec25] hover:text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-sm">
                   <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
                 </button>
               </div>
@@ -193,6 +221,33 @@ const brands = ['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva 
             </button>
         </div>
       </section>
+
+      <!-- Confirm Popup -->
+      <div v-if="showConfirm" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 w-90 text-center">
+          <h3 class="font-bold text-lg mb-3">ยืนยันการเพิ่มสินค้า</h3>
+          <p class="text-gray-600 mb-5">
+            ต้องการเพิ่มสินค้า 
+            <span class="font-bold">
+              {{ selectedProduct?.name }}
+            </span>
+            ลงตะกร้าหรือไม่?
+          </p>
+
+          <div class="flex gap-3 justify-center">
+            <button @click="closeConfirm" class="px-4 py-2 rounded border">
+              ยกเลิก
+            </button>
+
+            <button @click="confirmAddToCart"
+              class="px-4 py-2 rounded bg-[#13ec25] text-black font-bold">
+              ยืนยัน
+            </button>
+
+          </div>
+
+        </div>
+      </div>
     </main>
   <Footer />
   </div>
