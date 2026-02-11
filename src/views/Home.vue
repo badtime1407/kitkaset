@@ -26,7 +26,7 @@ const products = ref([
     reviews: 120,
     image: 'https://www.qmaxagrotech.com/images/content/original-1685436057325.png',
     badge: { type: 'discount', text: '-15%' },
-    link: '/Shoppingcart'
+    link: '/Productdetails'
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const products = ref([
     reviews: 85,
     image: 'https://www.qmaxagrotech.com/images/content/original-1727402473253.png',
     badge: null,
-    link: '/Shoppingcart'
+    link: '/Productdetails'
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ const products = ref([
     reviews: 52,
     image: 'https://max-ag.com/wp-content/uploads/2022/02/%E0%B8%AD%E0%B8%B0%E0%B8%9A%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%99.png',
     badge: { type: 'new', text: 'New' },
-    link: '/Shoppingcart'
+    link: '/Productdetails'
   },
   {
     id: 4,
@@ -56,7 +56,7 @@ const products = ref([
     reviews: 41,
     image: 'https://erawanagri.com/wp-content/uploads/2022/04/erabas-640-240x300.png',
     badge: null,
-    link: '/Shoppingcart'
+    link: '/Productdetails'
   }
 ])
 

@@ -1,32 +1,6 @@
 <template>
   <div class="min-h-screen bg-white font-display text-[#0d1b0f]">
-    <header class="flex items-center justify-between px-10 py-4 border-b border-[#cfe7d1]">
-      <div class="flex items-center gap-2">
-        <div class="size-8">
-          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" 
-            fill="#13ec25"></path> 
-          </svg>
-        </div>
-        <h2 class="text-xl font-bold">กิจเกษตร</h2>
-      </div>
-      <nav class="flex items-center gap-8 text-sm font-medium">
-        <a href="#" class="hover:text-[#13ec25]">Shop</a>
-        <a href="#" class="hover:text-[#13ec25]">Consultation</a>
-        <a href="#" class="hover:text-[#13ec25]">My Orders</a>
-        <div class="flex gap-2">
-          <div class="relative p-2 bg-[#e7f3e8] rounded-lg">
-            <span class="material-symbols-outlined text-lg">shopping_cart</span>
-            <span class="absolute -top-1 -right-1 bg-[#13ec25] text-white text-[10px] size-4 rounded-full flex items-center justify-center font-bold">
-              {{ cart.items.length }}
-            </span>
-          </div>
-          <div class="p-2 bg-[#e7f3e8] rounded-lg">
-            <span class="material-symbols-outlined text-lg">person</span>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <Navbar2 />
 
     <main class="max-w-6xl mx-auto px-4 py-8">
       <div class="mb-10">
@@ -131,5 +105,6 @@
 
 <script setup>
 import { useCartStore } from "@/stores/cart";
+import Navbar2 from "../components/Navbar2.vue";
 const cart = useCartStore();
 </script>

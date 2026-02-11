@@ -1,32 +1,6 @@
 <template>
   <div class="flex h-screen flex-col overflow-hidden bg-[#f0f2f0] font-display text-black font-medium">
-    <header class="flex items-center justify-between border-b border-[#e7f3e8] bg-white px-6 py-3 shrink-0 shadow-sm z-20">
-      <div class="flex items-center gap-8">
-        <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-          <div class="size-8 text-[#13ec25]">
-            <svg fill="currentColor" viewBox="0 0 48 48">
-              <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z"></path>
-            </svg>
-          </div>
-          <h2 class="text-xl font-extrabold tracking-tight text-black">กิจเกษตร</h2>
-        </a>
-        <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-black">
-          <a href="/Productall" class="hover:text-[#13ec25]">ร้านค้า</a>
-          <a href="/consult" class="text-[#13ec25] underline decoration-2 underline-offset-8 font-extrabold">การให้คำปรึกษา</a>
-        </nav>
-      </div>
-      <div class="flex items-center gap-4">
-        <div class="bg-[#e7f3e8] rounded-xl px-4 py-2 flex items-center gap-3 border border-[#d1e3d1]">
-          <span class="material-symbols-outlined text-[#4c9a52] text-xl font-bold">search</span>
-          <input type="text" placeholder="ค้นหาคำสั่งซื้อ ผู้เชี่ยวชาญ..." class="bg-transparent border-none text-xs font-bold outline-none w-56 placeholder:text-black text-black">
-        </div>
-        <button class="material-symbols-outlined text-black font-bold cursor-pointer hover:text-[#13ec25]">notifications</button>
-        <a href="/settings" class="material-symbols-outlined text-black font-bold cursor-pointer hover:text-[#13ec25]">settings</a>
-        <a href="/profile" class="size-10 rounded-full bg-gray-300 border-2 border-white shadow-sm overflow-hidden hover:ring-2 hover:ring-[#13ec25]">
-           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgvoOmD8Yhr90O55sFJngSV6XhXkFP7VgRcw&s" alt="user">
-        </a>
-      </div>
-    </header>
+    <Navbar2 />
 
     <main class="flex flex-1 overflow-hidden">
       <aside class="w-80 border-r border-[#e7f3e8] bg-[#fcfdfc] flex flex-col shrink-0 text-black">
@@ -161,6 +135,7 @@
 
 <script setup>
 import { ref, computed, nextTick } from 'vue'
+import Navbar2 from '../components/Navbar2.vue'
 
 // --- SETTINGS & STATE ---
 const input = ref('')

@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue';
 import { useCartStore } from "@/stores/cart";
 import Footer from '../components/Footer.vue';
+import Navbar2 from '../components/Navbar2.vue';
 
 const cart = useCartStore();
 
@@ -29,7 +30,7 @@ const products = ref([
       tag: 'Top Rated',
       tagColor: 'bg-[#13ec25] text-black',
       brand: 'Bayer Crop Science',
-      link: '/Shoppingcart'
+      link: '/Productdetails'
     },
     { 
       id: 2, name: 'วีวีฟอส',
@@ -38,7 +39,7 @@ const products = ref([
       tag: 'Best Value', 
       tagColor: 'bg-blue-600 text-white', 
       brand: 'Syngenta',
-      link: '/Shoppingcart'
+      link: '/Productdetails'
     },
     { 
       id: 3, name: 'โซเซียน่า ', 
@@ -46,7 +47,7 @@ const products = ref([
       image: 'https://www.qmaxagrotech.com/images/content/original-1685331075682.png', 
       tag: null, 
       brand: 'BASF Agricultural',
-      link: '/Shoppingcart' 
+      link: '/Productdetails' 
     },
     { 
       id: 4, name: 'ดอสซ์', 
@@ -54,7 +55,7 @@ const products = ref([
       image: 'https://www.pitsulin.com/wp-content/uploads/2025/01/unnamed-file-1.png',
       tag: null,
       brand: 'Bayer Crop Science',
-      link: '/Shoppingcart' 
+      link: '/Productdetails' 
     },
     { 
       id: 5, name: 'โซเพอร์การ์ด 10 อีซี', 
@@ -62,7 +63,7 @@ const products = ref([
       image: 'https://www.cheminpestcontrol.com/cdn/shop/products/10---1_grande.png?v=1543376829', 
       tag: null,
       brand: 'Corteva Agriscience',
-      link: '/Shoppingcart' 
+      link: '/Productdetails' 
     },
     { 
       id: 6, name: 'ฟิพ-การ์ด เอสซี ',
@@ -70,7 +71,7 @@ const products = ref([
       image: 'https://www.pitsulin.com/wp-content/uploads/2021/04/unnamed-file-12.png', 
       tag: null,
       brand: 'Syngenta',
-      link: '/Shoppingcart' 
+      link: '/Productdetails' 
     }
 ]);
 
@@ -90,47 +91,12 @@ const categories = ref([
 ])
 
 const brands = ['Bayer Crop Science', 'Syngenta', 'BASF Agricultural', 'Corteva Agriscience'];
-
-const navItems = [
-  { name: 'สารเคมีเกษตร', link: '/', active: true },
-  { name: 'การปรึกษา', link: '/', active: false },
-  { name: 'อุปกรณ์เกษตร', link: '/', active: false },
-  { name: 'เกี่ยวกับเรา', link: '/', active: false }
-];
+;
 </script>
 
 <template>
   <div class="min-h-screen bg-[#f9f9f9] font-main text-[#0d1b0f]">
-    <header class="sticky top-0 z-50 flex items-center justify-between py-3 px-4 md:px-10 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
-      <router-link to="/" class="flex items-center gap-3 shrink-0 cursor-pointer group">
-        <div class="text-[#010101] size-9 transition-transform group-hover:rotate-12">
-          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
-          </svg>
-        </div>
-        <h2 class="text-xl font-black text-black">กิจเกษตร</h2>
-      </router-link>
-        
-      <nav class="hidden md:flex gap-8 ml-6 text-sm font-bold text-gray-500">
-        <router-link v-for="item in navItems" :key="item.name" :to="item.link" class="hover:text-black transition-colors" :class="{'text-black border-b-2 border-[#13ec25]': item.active}">
-          {{ item.name }}
-        </router-link>
-      </nav>
-
-      <div class="flex items-center gap-4 flex-1 max-w-md justify-end">
-        <div class="flex gap-2">
-          <router-link to="/Shoppingcart" class="relative p-2">
-            <span class="material-symbols-outlined">
-              shopping_cart
-            </span>
-            <span v-if="cart.totalQty > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
-              {{ cart.totalQty }}
-            </span>
-          </router-link>
-          <router-link to="/Profile" class="p-2 text-gray-600 hover:text-[#13ec25] transition-colors"><span class="material-symbols-outlined">person</span></router-link>
-        </div>
-      </div>
-    </header>
+    <navbar2 />
 
     <main class="max-w-full w-full px-4 md:px-10 py-10 flex flex-col lg:flex-row gap-10">
       <aside class="w-full lg:w-64 flex-shrink-0 space-y-8">
