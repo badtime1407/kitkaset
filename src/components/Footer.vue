@@ -23,9 +23,9 @@
         <div>
           <h4 class="font-bold text-sm mb-4 text-gray-900">การบริการ</h4>
           <ul class="text-xs space-y-3 text-gray-500">
-            <li><router-link to="/consultation" class="hover:text-[#1ED730]">ปรึกษาผู้เชี่ยวชาญ</router-link></li>
-            <li><a href="#" class="hover:text-[#1ED730]">ติดตามสถานะการส่ง</a></li>
-            <li><a href="#" class="hover:text-[#1ED730]">นโยบายการคืนเงิน</a></li>
+            <li><router-link to="/chat" class="hover:text-[#1ED730]">ปรึกษาผู้เชี่ยวชาญ</router-link></li>
+            <li><router-link to="/order" class="hover:text-[#1ED730]">ติดตามสถานะการส่ง</router-link></li>
+            <li><router-link to="" class="hover:text-[#1ED730]">นโยบายการคืนเงิน</router-link></li>
           </ul>
         </div>
         <div>
