@@ -1,9 +1,12 @@
 <script setup>
-import { ref, computed } from "vue"
+import { ref, computed, watch } from "vue"
 import { useCartStore } from "@/stores/cart"
 import { useProductStore } from "@/stores/product"
 import Footer from "../components/Footer.vue"
 import Navbar2 from "../components/Navbar2.vue"
+import { useRoute } from "vue-router"
+
+const route = useRoute()
 
 /* ===== Store ===== */
 const cart = useCartStore()
@@ -12,6 +15,18 @@ const productStore = useProductStore()
 /* ===== State ===== */
 const searchQuery = ref("")
 const selectedCategory = ref("all")
+watch(
+  () => route.params.category,
+  (newCategory) => {
+    if (!newCategory) {
+      selectedCategory.value = "all"
+    } else {
+      selectedCategory.value = newCategory
+    }
+  },
+  { immediate: true }
+)
+
 const selectedBrands = ref([])
 
 /* ===== Categories (ต้องมี!) ===== */

@@ -20,7 +20,7 @@ const routes = [
   { path: '/register', component: Register},
   { path: '/resetpassword', component: Resetpassword},
   { path: "/productall", component: Productall },
-  { path: "/products/:category?", component: Productall },
+  { path: "/products/:category?", name: "ProductsByCategory", component: Productall },
   { path: '/shoppingcart' , component: ShoppingCart},
   { path: '/profile' , component : Profile},
   { path: '/address' , component : Address},

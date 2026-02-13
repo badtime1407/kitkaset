@@ -1,64 +1,29 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
+import { useProductStore } from '@/stores/product'
 import navbar from '../components/navbar.vue'
+import Footer from '../components/Footer.vue'
 
 const cart = useCartStore()
+const productStore = useProductStore()
 
-// --- State ทั่วไป ---
+/* ================= STATE ================= */
 const searchInput = ref('')
 
-// --- State หมวดหมู่ (Categories) ---
+/* ================= CATEGORY ================= */
 const categories = ref([
   { name: 'ทั้งหมด', icon: 'potted_plant', link: '/Productall' },
-  { name: 'สารกำจัดวัชพืช', icon: 'eco', link: '/Product1' },
-  { name: 'สารกำจัดแมลง', icon: 'bug_report', link: '/Product2' },
-  { name: 'สารป้องกันโรค', icon: 'health_and_safety', link: '/Product3' }
+  { name: 'สารกำจัดวัชพืช', icon: 'eco', link: '/products/herbicide' },
+  { name: 'สารกำจัดแมลง', icon: 'bug_report', link: '/products/insecticide' },
+  { name: 'สารป้องกันโรค', icon: 'health_and_safety', link: '/products/fungicide' }
 ])
 
-// --- State สินค้า (Featured Products) ---
-const products = ref([
-  {
-    id: 1,
-    name: 'คิวแม็กซ์ พินาโซล',
-    price: 550,
-    rating: 4.8,
-    reviews: 120,
-    image: 'https://www.qmaxagrotech.com/images/content/original-1685436057325.png',
-    badge: { type: 'discount', text: '-15%' },
-    link: '/Productdetails'
-  },
-  {
-    id: 2,
-    name: 'ฟีโนบูคาร์บ',
-    price: 320,
-    rating: 4.5,
-    reviews: 85,
-    image: 'https://www.qmaxagrotech.com/images/content/original-1727402473253.png',
-    badge: null,
-    link: '/Productdetails'
-  },
-  {
-    id: 3,
-    name: 'อะบาเมกติน',
-    price: 260,
-    rating: 4.9,
-    reviews: 52,
-    image: 'https://max-ag.com/wp-content/uploads/2022/02/%E0%B8%AD%E0%B8%B0%E0%B8%9A%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%99.png',
-    badge: { type: 'new', text: 'New' },
-    link: '/Productdetails'
-  },
-  {
-    id: 4,
-    name: 'เอราเบส',
-    price: 260,
-    rating: 4.7,
-    reviews: 41,
-    image: 'https://erawanagri.com/wp-content/uploads/2022/04/erabas-640-240x300.png',
-    badge: null,
-    link: '/Productdetails'
-  }
-])
+/* ================= ใช้ข้อมูลจาก Store ================= */
+/* ดึง 4 ตัวแรกไปแสดงเหมือนเดิม */
+const products = computed(() => {
+  return productStore.products.slice(0, 4)
+})
 
 const features = ref([
   { icon: 'local_shipping', title: 'Safe & Fast Delivery', sub: 'Directly to your farm gate' },
@@ -67,9 +32,35 @@ const features = ref([
 ])
 
 const addToCart = (product) => {
-  cart.addToCart(product)
+  cart.addToCart({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: product.image
+  })
+}
+
+/* ===== Popup ===== */
+const showConfirm = ref(false)
+const selectedProduct = ref(null)
+
+function openConfirm(p) {
+  selectedProduct.value = p
+  showConfirm.value = true
+}
+
+function closeConfirm() {
+  showConfirm.value = false
+  selectedProduct.value = null
+}
+
+function confirmAddToCart() {
+  if (!selectedProduct.value) return
+  addToCart(selectedProduct.value)
+  closeConfirm()
 }
 </script>
+
 
 <template>
   <navbar />
@@ -111,43 +102,45 @@ const addToCart = (product) => {
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <router-link v-for="product in products" :key="product.id" :to="product.link"
-             class="group flex flex-col bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-[#1ED730] transition-all duration-300">
+          
+          <router-link 
+            v-for="product in products" 
+            :key="product.id" 
+            :to="`/product/${product.id}`"
+            class="group flex flex-col bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-[#1ED730] transition-all duration-300"
+          >
             
             <div class="relative aspect-[4/5] w-full overflow-hidden bg-[#f9f9f9] p-4">
-              <img class="h-full w-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
-                   :src="product.image" :alt="product.name" />
-              
-              <span v-if="product.badge" 
-                    :class="[
-                      'absolute top-3 left-3 text-[10px] font-bold px-2 py-1 rounded shadow-sm',
-                      product.badge.type === 'discount' ? 'bg-red-500 text-white' : 'bg-[#1ED730] text-black'
-                    ]">
-                {{ product.badge.text }}
-              </span>
+              <img
+                class="h-full w-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
+                :src="product.image"
+                :alt="product.name"
+              />
             </div>
 
             <div class="p-4 flex flex-col flex-1">
-              <h3 class="font-bold text-sm mt-1 mb-2 text-gray-800 line-clamp-2 group-hover:text-[#1ED730] transition-colors">{{ product.name }}</h3>
-              
-              <div class="flex items-center gap-1 mb-3">
-                <span class="material-symbols-outlined !text-sm text-yellow-400 fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
-                <span class="text-xs font-bold">{{ product.rating }}</span>
-                <span class="text-xs text-gray-400">({{ product.reviews }})</span>
-              </div>
+              <h3 class="font-bold text-sm mt-1 mb-2 text-gray-800 line-clamp-2 group-hover:text-[#1ED730] transition-colors">
+                {{ product.name }}
+              </h3>
               
               <div class="mt-auto flex items-center justify-between">
-                <span class="text-lg font-black text-gray-900">฿{{ product.price }}</span>
+                <span class="text-lg font-black text-gray-900">
+                  ฿{{ product.price.toLocaleString() }}
+                </span>
+
                 <button 
                   class="size-10 flex items-center justify-center bg-[#1ED730] text-black rounded-lg hover:bg-[#18b528] hover:shadow-lg active:scale-95 transition-all z-10" 
-                  @click.prevent="addToCart(product)">
+                  @click.prevent="openConfirm(product)">
                   <span class="material-symbols-outlined">add_shopping_cart</span>
                 </button>
               </div>
             </div>
+
           </router-link>
+
         </div>
       </section>
+
 
       <section class="bg-[#1a2e1c] rounded-2xl overflow-hidden relative shadow-lg mt-12">
         <div class="flex flex-col md:flex-row items-stretch min-h-[320px]">
@@ -185,46 +178,42 @@ const addToCart = (product) => {
       </section>
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-12 px-6 md:px-10 lg:px-40 mt-12">
-      <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div class="space-y-4">
-          <div class="flex items-center gap-2">
-            <div class="text-[#1ED730] size-6">
-              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
-              </svg>
-            </div>
-            <h2 class="text-lg font-bold text-gray-900">กิจเกษตร</h2>
-          </div>
-          <p class="text-xs text-gray-500 leading-relaxed">ผู้นำด้านเทคโนโลยีการเกษตรสมัยใหม่ ที่ได้รับความไว้วางใจจากเกษตรกรไทย</p>
-        </div>
-        <div>
-          <h4 class="font-bold text-sm mb-4 text-gray-900">หมวดหมู่สินค้า</h4>
-          <ul class="text-xs space-y-3 text-gray-500">
-            <li><router-link to="/Product1" class="hover:text-[#1ED730]">สารกำจัดวัชพืช</router-link></li>
-            <li><router-link to="/Product2" class="hover:text-[#1ED730]">สารกำจัดแมลง</router-link></li>
-            <li><router-link to="/Product3" class="hover:text-[#1ED730]">สารป้องกันโรคพืช</router-link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-bold text-sm mb-4 text-gray-900">การบริการ</h4>
-          <ul class="text-xs space-y-3 text-gray-500">
-            <li><router-link to="/consultation" class="hover:text-[#1ED730]">ปรึกษาผู้เชี่ยวชาญ</router-link></li>
-            <li><a href="#" class="hover:text-[#1ED730]">ติดตามสถานะการส่ง</a></li>
-            <li><a href="#" class="hover:text-[#1ED730]">นโยบายการคืนเงิน</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-bold text-sm mb-4 text-gray-900">รับข่าวสารและส่วนลด</h4>
-          <div class="flex gap-2">
-            <input class="flex-1 rounded-lg border border-gray-200 bg-gray-50 text-xs px-3 py-2 focus:ring-2 focus:ring-[#1ED730] outline-none" placeholder="อีเมลของคุณ" type="email" />
-            <button class="bg-[#1ED730] text-[#0d1b0f] px-4 py-2 rounded-lg font-bold text-xs hover:bg-[#18b528]">ส่ง</button>
+        <!-- Confirm Popup -->
+      <div
+        v-if="showConfirm"
+        class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      >
+        <div class="bg-white rounded-xl p-6 w-90 text-center">
+          <h3 class="font-bold text-lg mb-3">
+            ยืนยันการเพิ่มสินค้า
+          </h3>
+
+          <p class="text-gray-600 mb-5">
+            ต้องการเพิ่มสินค้า
+            <span class="font-bold">
+              {{ selectedProduct?.name }}
+            </span>
+            ลงตะกร้าหรือไม่?
+          </p>
+
+          <div class="flex gap-3 justify-center">
+            <button
+              @click="closeConfirm"
+              class="px-4 py-2 rounded border"
+            >
+              ยกเลิก
+            </button>
+
+            <button
+              @click="confirmAddToCart"
+              class="px-4 py-2 rounded bg-[#13ec25] text-black font-bold"
+            >
+              ยืนยัน
+            </button>
           </div>
         </div>
       </div>
-      <div class="max-w-[1280px] mx-auto mt-12 pt-8 border-t border-gray-100 text-center text-[10px] text-gray-400">
-        © 2026 Kij Kaset Co., Ltd. All rights reserved.
-      </div>
-    </footer>
+
+    <Footer />
   </div>
 </template>

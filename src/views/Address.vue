@@ -16,7 +16,7 @@ const navigationItems = [
   { name: 'My Profile', icon: 'person', path: '/profile' },
   { name: 'Address Book', icon: 'location_on', path: '/address' },
   { name: 'Order History', icon: 'inventory_2', path: '/' },
-  { name: 'Account Settings', icon: 'settings', path: '/' },
+  { name: 'Account Settings', icon: 'settings', path: '/setting' },
 ]
 
 const isActive = (path) => route.path === path

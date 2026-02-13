@@ -1,3 +1,6 @@
+<script>
+import { useProductStore } from "@/stores/product"
+</script>
 <template>
         <footer class="bg-white border-t border-gray-100 py-12 px-6 md:px-10 lg:px-40 mt-12">
       <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -15,9 +18,9 @@
         <div>
           <h4 class="font-bold text-sm mb-4 text-gray-900">หมวดหมู่สินค้า</h4>
           <ul class="text-xs space-y-3 text-gray-500">
-            <li><router-link to="/Product1" class="hover:text-[#1ED730]">สารกำจัดวัชพืช</router-link></li>
-            <li><router-link to="/Product2" class="hover:text-[#1ED730]">สารกำจัดแมลง</router-link></li>
-            <li><router-link to="/Product3" class="hover:text-[#1ED730]">สารป้องกันโรคพืช</router-link></li>
+            <li><router-link to="`/product/${product.id}`" class="hover:text-[#1ED730]">สารกำจัดวัชพืช</router-link></li>
+            <li><router-link to="`/product/${product.id}`" class="hover:text-[#1ED730]">สารกำจัดแมลง</router-link></li>
+            <li><router-link to="`/product/${product.id}`" class="hover:text-[#1ED730]">สารป้องกันโรคพืช</router-link></li>
           </ul>
         </div>
         <div>
