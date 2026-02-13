@@ -56,7 +56,7 @@ export const useProductStore = defineStore("product", {
       {
         id: 6,
         name: "ควิกไบท์",
-        price: 1,550,
+        price: 1550,
         image: "https://www.cheminpestcontrol.com/cdn/shop/products/quick-bayt-1_1024x1024.png?v=1543376716",
         brand: "Bayer Crop Science",
         category: "insecticide"
@@ -80,7 +80,7 @@ export const useProductStore = defineStore("product", {
       {
         id: 9,
         name: "ดอสซ์",
-        price: 1,350,
+        price: 1350,
         image: "https://www.pitsulin.com/wp-content/uploads/2025/01/unnamed-file-1.png",
         brand: "Bayer Crop Science",
         category: "insecticide"
@@ -109,7 +109,7 @@ export const useProductStore = defineStore("product", {
       {
         id: 12,
         name: "คิวโทมอร์ฟ",
-        price: 1,050,
+        price: 1050,
         image: "https://www.qmaxagrotech.com/images/ready-template/crop-1685349655467.png",
         brand: "Syngenta",
         category: "fungicide"
