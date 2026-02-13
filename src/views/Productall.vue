@@ -249,6 +249,8 @@ function confirmAddToCart() {
         </div>
       </div>
     </main>
+
   <Footer />
+  
   </div>
 </template>
