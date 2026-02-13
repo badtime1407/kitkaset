@@ -15,8 +15,8 @@ const errorMessage = ref('')
 const navigationItems = [
   { name: 'My Profile', icon: 'person', path: '/profile' },
   { name: 'Address Book', icon: 'location_on', path: '/address' },
-  { name: 'Order History', icon: 'inventory_2', path: '/' },
-  { name: 'Account Settings', icon: 'settings', path: '/' },
+  { name: 'Order History', icon: 'inventory_2', path: '/Order' },
+  { name: 'Account Settings', icon: 'settings', path: '/Setting' },
 ]
 
 const isActive = (path) => route.path === path
