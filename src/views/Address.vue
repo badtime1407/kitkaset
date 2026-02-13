@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import Sidebar from '../components/Sidebar.vue'
 
 const route = useRoute()
 const showConfirm = ref(false)
@@ -165,69 +166,7 @@ const setDefault = (index) => {
 <template>
 <div class="flex min-h-screen w-full bg-[#F8F9F8] font-sans">
 
-  <!-- Sidebar -->
-  <aside class="w-64 bg-white hidden lg:flex flex-col border-r border-gray-100 sticky top-0 h-screen">
-
-    <div class="p-6 flex flex-col h-full">
-
-      <!-- Logo -->
-      <router-link to="/" class="flex items-center gap-3 mb-10 group no-underline">
-
-        <div class="bg-[#00D632] p-2 rounded-xl">
-          <span class="material-symbols-outlined text-white">agriculture</span>
-        </div>
-
-        <div>
-          <h1 class="font-black text-lg">กิจเกษตร</h1>
-          <p class="text-[#00D632] text-[9px] font-bold">Consultant</p>
-        </div>
-
-      </router-link>
-
-
-      <!-- Menu -->
-      <nav class="flex flex-col gap-1.5 grow">
-
-        <router-link
-          v-for="item in navigationItems"
-          :key="item.name"
-          :to="item.path"
-          :class="[
-            'flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-bold text-sm no-underline transition-all',
-            isActive(item.path)
-              ? 'bg-[#EBF9F1] text-[#00D632]'
-              : 'text-gray-400 hover:bg-gray-50'
-          ]"
-        >
-
-          <span class="material-symbols-outlined text-[22px]">
-            {{ item.icon }}
-          </span>
-
-          {{ item.name }}
-
-        </router-link>
-
-      </nav>
-
-
-      <!-- Logout -->
-      <div class="pt-4 border-t">
-
-        <router-link
-          to="/login"
-          class="flex items-center gap-3 px-4 py-3 text-rose-500 hover:bg-rose-50 rounded-xl font-bold no-underline"
-        >
-
-          <span class="material-symbols-outlined">logout</span>
-          Logout
-
-        </router-link>
-
-      </div>
-
-    </div>
-  </aside>
+  <Sidebar />
 
 
   <!-- Main -->

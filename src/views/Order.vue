@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import Sidebar from '@/components/Sidebar.vue'
 
 const route = useRoute()
 
@@ -39,40 +40,7 @@ const orders = ref([
 <template>
   <div class="flex min-h-screen w-full bg-[#F8F9F8] font-sans">
     
-    <aside class="w-72 bg-white hidden lg:flex flex-col border-r border-gray-100 sticky top-0 h-screen">
-      <div class="p-8 flex flex-col h-full">
-        
-        <router-link to="/" class="flex items-center gap-3 mb-12 px-2 no-underline">
-          <div class="bg-[#00D632] p-2 rounded-xl">
-            <span class="material-symbols-outlined text-white text-xl">agriculture</span>
-          </div>
-          <div>
-            <h1 class="text-[#1A3128] text-lg font-extrabold leading-tight">กิจเกษตร</h1>
-            <p class="text-[#00D632] text-[9px] font-black uppercase tracking-widest">ที่ปรึกษาด้านการเกษตร</p>
-          </div>
-        </router-link>
-
-        <nav class="flex flex-col gap-2 grow">
-          <router-link 
-            v-for="item in navigationItems" 
-            :key="item.name"
-            :to="item.path"
-            :class="['flex items-center gap-4 px-5 py-4 rounded-2xl transition-all font-bold text-sm no-underline', 
-            isActive(item.path) ? 'bg-[#EBF9F1] text-[#00D632]' : 'text-gray-500 hover:bg-gray-50']"
-          >
-            <span class="material-symbols-outlined text-[22px]">{{ item.icon }}</span>
-            <span>{{ item.name }}</span>
-          </router-link>
-        </nav>
-
-        <div class="pt-6 border-t border-gray-50">
-          <router-link to="/login" class="flex items-center gap-4 px-5 py-4 text-rose-500 hover:bg-rose-50 rounded-2xl transition-all font-bold text-sm no-underline">
-            <span class="material-symbols-outlined text-[22px]">logout</span>
-            <span>Logout</span>
-          </router-link>
-        </div>
-      </div>
-    </aside>
+    <Sidebar />
 
     <main class="flex-1 p-10 lg:p-16 overflow-y-auto">
       <div class="max-w-[1100px] mx-auto">

@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import Sidebar from '../components/Sidebar.vue'
 
 const route = useRoute()
 
@@ -60,69 +61,7 @@ const discard = () => {
 <template>
   <div class="flex min-h-screen w-full bg-[#F8F9F8] font-sans">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white hidden lg:flex flex-col border-r border-gray-100 sticky top-0 h-screen">
-
-      <div class="p-6 flex flex-col h-full">
-
-        <!-- Logo -->
-        <router-link
-          to="/"
-          class="flex items-center gap-3 mb-10 px-2 no-underline"
-        >
-          <div class="bg-[#00D632] p-2 rounded-xl">
-            <span class="material-symbols-outlined text-white">
-              agriculture
-            </span>
-          </div>
-
-          <div>
-            <h1 class="text-[#1A3128] font-extrabold">
-              กิจเกษตร
-            </h1>
-            <p class="text-[#00D632] text-[9px] font-black uppercase">
-              Consultant
-            </p>
-          </div>
-        </router-link>
-
-        <!-- Menu -->
-        <nav class="flex flex-col gap-1.5 grow">
-
-          <router-link
-            v-for="item in navigationItems"
-            :key="item.name"
-            :to="item.path"
-            :class="[
-              'flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm no-underline transition-all',
-              isActive(item.path)
-                ? 'bg-[#EBF9F1] text-[#00D632]'
-                : 'text-gray-400 hover:bg-gray-50'
-            ]"
-          >
-            <span class="material-symbols-outlined">
-              {{ item.icon }}
-            </span>
-
-            {{ item.name }}
-
-          </router-link>
-
-        </nav>
-
-        <!-- Logout -->
-        <router-link
-          to="/Login"
-          class="flex items-center gap-3 px-4 py-3 text-rose-500 hover:bg-rose-50 rounded-2xl font-bold text-sm no-underline"
-        >
-          <span class="material-symbols-outlined">logout</span>
-          Logout
-        </router-link>
-
-      </div>
-
-    </aside>
-
+    <Sidebar />
 
     <!-- Main -->
     <main class="flex-1 p-8 lg:p-14 xl:p-20 overflow-y-auto">
