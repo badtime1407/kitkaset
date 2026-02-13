@@ -183,9 +183,10 @@ function confirmAddToCart() {
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6"
         >
 
-          <div
+          <router-link
             v-for="p in filteredProducts"
             :key="p.id"
+            :to="`/product/${p.id}`"
             class="group bg-white rounded-[2rem] border border-[#E7F0E8] p-4 transition-all hover:shadow-2xl hover:shadow-[#13ec25]/10 hover:-translate-y-1"
           >
 
@@ -207,7 +208,7 @@ function confirmAddToCart() {
 
               <div class="flex items-center justify-between pt-3">
                 <span class="text-xl font-black text-black">
-                  {{ p.price }} บาท
+                  {{ p.price.toLocaleString() }} บาท
                 </span>
 
                 <button
@@ -221,7 +222,7 @@ function confirmAddToCart() {
               </div>
             </div>
 
-          </div>
+          </router-link>
         </div>
 
       </section>

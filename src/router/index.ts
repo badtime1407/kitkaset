@@ -4,9 +4,6 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Resetpassword from '../views/Resetpassword.vue'
 import Productall from '../views/Productall.vue'
-import Product1 from '../views/Product1.vue'
-import Product2 from '../views/Product2.vue'
-import Product3 from '../views/Product3.vue'
 import ShoppingCart from '../views/Shoppingcart.vue'
 import Profile from '../views/profile.vue'
 import Setting from '../views/setting.vue'
@@ -24,9 +21,6 @@ const routes = [
   { path: '/resetpassword', component: Resetpassword},
   { path: "/productall", component: Productall },
   { path: "/products/:category?", component: Productall },
-  { path: '/product1' , component: Product1},
-  { path: '/product2' , component: Product2},
-  { path: '/product3' , component: Product3},
   { path: '/shoppingcart' , component: ShoppingCart},
   { path: '/profile' , component : Profile},
   { path: '/address' , component : Address},
@@ -34,7 +28,7 @@ const routes = [
   { path: '/setting', component : Setting},
   { path: '/payment', component : Payment},
   { path : '/chat' , component : Chat},
-  { path : '/Productdetails' , component : Productdetails},
+  { path: "/product/:id", component: Productdetails },
   { path : '/Advicecenter', component : Advicecenter}
 ]
 
