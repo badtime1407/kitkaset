@@ -17,13 +17,13 @@ import Chat from '../views/Chat.vue'
 import Productdetails from '../views/Productdetails.vue'
 import Advicecenter from '../views/Advicecenter.vue'
 
-
 const routes = [
   { path: '/', component: Home },
   { path: '/login', component: Login},
   { path: '/register', component: Register},
   { path: '/resetpassword', component: Resetpassword},
-  { path: '/productall' , component: Productall},
+  { path: "/productall", component: Productall },
+  { path: "/products/:category?", component: Productall },
   { path: '/product1' , component: Product1},
   { path: '/product2' , component: Product2},
   { path: '/product3' , component: Product3},
