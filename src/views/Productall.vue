@@ -227,7 +227,7 @@ function confirmAddToCart() {
                 </span>
 
                 <button
-                  @click="openConfirm(p)"
+                  @click.stop.prevent="openConfirm(p)"
                   class="bg-[#F0F4F0] hover:bg-[#13ec25] text-[#13ec25] hover:text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-sm"
                 >
                   <span class="material-symbols-outlined text-[20px]">
