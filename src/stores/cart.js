@@ -3,6 +3,9 @@ import { defineStore } from "pinia";
 export const useCartStore = defineStore("cart", {
   state: () => ({
     items: JSON.parse(localStorage.getItem("cart_items")) || [],
+
+    // 🔥 เพิ่มส่วน checkout
+    checkoutData: JSON.parse(localStorage.getItem("checkout_data")) || null,
   }),
 
   getters: {
@@ -22,6 +25,7 @@ export const useCartStore = defineStore("cart", {
   },
 
   actions: {
+    /* ---------------- Save ---------------- */
     save() {
       localStorage.setItem(
         "cart_items",
@@ -29,6 +33,14 @@ export const useCartStore = defineStore("cart", {
       );
     },
 
+    saveCheckout() {
+      localStorage.setItem(
+        "checkout_data",
+        JSON.stringify(this.checkoutData)
+      );
+    },
+
+    /* ---------------- Cart ---------------- */
     addToCart(product) {
       const item = this.items.find(i => i.id === product.id);
 
@@ -64,6 +76,17 @@ export const useCartStore = defineStore("cart", {
     clear() {
       this.items = [];
       this.save();
+    },
+
+    /* ---------------- Checkout ---------------- */
+    setCheckout(data) {
+      this.checkoutData = data;
+      this.saveCheckout();
+    },
+
+    clearCheckout() {
+      this.checkoutData = null;
+      localStorage.removeItem("checkout_data");
     },
   },
 });

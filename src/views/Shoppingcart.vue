@@ -307,8 +307,9 @@ function applyCoupon() {
 
 /* Final Price */
 const finalTotal = computed(() => {
-  return cart.totalPrice + shipping - discount.value;
-});
+  const total = cart.totalPrice + shipping - discount.value
+  return total < 0 ? 0 : total
+})
 
 // Payment
 const router = useRouter();
