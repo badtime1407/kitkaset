@@ -1,17 +1,50 @@
 <script setup>
 import { useRoute } from "vue-router"
-import { computed } from "vue"
+import { computed, ref } from "vue"
 import { useProductStore } from "@/stores/product"
+import { useCartStore } from "@/stores/cart"
 import Navbar2 from "../components/Navbar2.vue"
 import Footer from "../components/Footer.vue"
 
 const route = useRoute()
 const productStore = useProductStore()
+const cart = useCartStore()
 
 const product = computed(() => {
   return productStore.getById(route.params.id)
 })
+
+/* ===== Add To Cart ===== */
+function addToCart(p) {
+  cart.addToCart({
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    image: p.image
+  })
+}
+
+/* ===== Popup ===== */
+const showConfirm = ref(false)
+const selectedProduct = ref(null)
+
+function openConfirm(p) {
+  selectedProduct.value = p
+  showConfirm.value = true
+}
+
+function closeConfirm() {
+  showConfirm.value = false
+  selectedProduct.value = null
+}
+
+function confirmAddToCart() {
+  if (!selectedProduct.value) return
+  addToCart(selectedProduct.value)
+  closeConfirm()
+}
 </script>
+
 
 <template>
   <div class="bg-[#f5f7f6] min-h-screen">
@@ -26,14 +59,17 @@ const product = computed(() => {
 
         <!-- LEFT IMAGE -->
         <div class="flex flex-col items-center">
-          <img
-            :src="product.image"
-            class="w-[280px] object-contain"
-          />
+          <img :src="product.image" class="w-[280px] object-contain"/>
 
           <!-- Description Grey Box -->
-          <div class="bg-gray-200 mt-6 p-4 text-sm text-gray-700 rounded-md w-full">
-            {{ product.description }}
+          <div class="bg-gray-100 mt-6 p-5 text-lg text-gray-700 rounded-xl w-full leading-relaxed border border-gray-200">
+            <h4 class="font-semibold mb-2 text-gray-800">
+              รายละเอียดสินค้า
+            </h4>
+
+            <p>
+              {{ product.description || "ยังไม่มีรายละเอียดสินค้า" }}
+            </p>
           </div>
         </div>
 
@@ -67,9 +103,8 @@ const product = computed(() => {
 
           <!-- Buttons -->
           <div class="space-y-3 mb-6">
-            <button
-              class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md font-semibold"
-            >
+            <button @click="openConfirm(product)"
+              class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md font-semibold">
               Buy Now
             </button>
 
@@ -144,143 +179,185 @@ const product = computed(() => {
 
       </div>
 
-<!-- ===================== -->
-<!-- REVIEW SECTION -->
-<!-- ===================== -->
-<div class="mt-16">
+      <!-- ===================== -->
+      <!-- REVIEW SECTION -->
+      <!-- ===================== -->
+        <div class="mt-16">
 
-  <!-- Header -->
-  <div class="flex justify-between items-center mb-6">
-    <h3 class="text-lg font-bold">
-      Customer Reviews
-    </h3>
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold">
+            Customer Reviews
+          </h3>
 
-    <button class="bg-green-100 text-green-700 px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-200">
-      Write a Review
-    </button>
-  </div>
-
-  <!-- Review Summary Card -->
-  <div class="bg-white rounded-2xl p-8 shadow-sm grid md:grid-cols-2 gap-10">
-
-    <!-- LEFT SCORE -->
-    <div>
-      <div class="text-5xl font-bold">4.8</div>
-
-      <div class="text-green-500 text-lg mt-2">
-        ★★★★★
-      </div>
-
-      <div class="text-sm text-gray-500 mt-1">
-        124 reviews
-      </div>
-    </div>
-
-    <!-- RIGHT BARS -->
-    <div class="space-y-3 text-sm">
-
-      <!-- 5 Star -->
-      <div class="flex items-center gap-3">
-        <span class="w-3">5</span>
-        <div class="flex-1 bg-gray-200 h-2 rounded-full">
-          <div class="bg-green-500 h-2 rounded-full w-[90%]"></div>
+          <button class="bg-green-100 text-green-700 px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-200">
+            Write a Review
+          </button>
         </div>
-        <span class="w-10 text-right text-gray-500">90%</span>
-      </div>
 
-      <!-- 4 Star -->
-      <div class="flex items-center gap-3">
-        <span class="w-3">4</span>
-        <div class="flex-1 bg-gray-200 h-2 rounded-full">
-          <div class="bg-green-500 h-2 rounded-full w-[5%]"></div>
-        </div>
-        <span class="w-10 text-right text-gray-500">5%</span>
-      </div>
+        <!-- Review Summary Card -->
+        <div class="bg-white rounded-2xl p-10 shadow-sm">
 
-      <!-- 3 Star -->
-      <div class="flex items-center gap-3">
-        <span class="w-3">3</span>
-        <div class="flex-1 bg-gray-200 h-2 rounded-full">
-          <div class="bg-green-500 h-2 rounded-full w-[2%]"></div>
-        </div>
-        <span class="w-10 text-right text-gray-500">2%</span>
-      </div>
+          <div class="flex items-start gap-12">
 
-      <!-- 2 Star -->
-      <div class="flex items-center gap-3">
-        <span class="w-3">2</span>
-        <div class="flex-1 bg-gray-200 h-2 rounded-full">
-          <div class="bg-green-500 h-2 rounded-full w-[1%]"></div>
-        </div>
-        <span class="w-10 text-right text-gray-500">1%</span>
-      </div>
+            <!-- LEFT SCORE -->
+            <div class="w-44">
+              <div class="text-7xl font-bold">4.8</div>
 
-      <!-- 1 Star -->
-      <div class="flex items-center gap-3">
-        <span class="w-3">1</span>
-        <div class="flex-1 bg-gray-200 h-2 rounded-full">
-          <div class="bg-green-500 h-2 rounded-full w-[2%]"></div>
-        </div>
-        <span class="w-10 text-right text-gray-500">2%</span>
-      </div>
+              <div class="text-green-500 text-xl mt-2">
+                ★★★★★
+              </div>
 
-    </div>
-  </div>
-
-  <!-- ===================== -->
-  <!-- PHOTOS SECTION -->
-  <!-- ===================== -->
-  <div class="mt-8">
-    <h4 class="text-sm font-semibold mb-4 text-gray-700">
-      Photos from farmers
-    </h4>
-
-    <div class="flex gap-4">
-      <img src="https://images.unsplash.com/photo-1598514982847-6c60f8b2a1d2" class="w-28 h-20 object-cover rounded-md"/>
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" class="w-28 h-20 object-cover rounded-md"/>
-      <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399" class="w-28 h-20 object-cover rounded-md"/>
-    </div>
-  </div>
-
-    <!-- ===================== -->
-    <!-- SINGLE REVIEW CARD -->
-    <!-- ===================== -->
-    <div class="bg-white rounded-2xl shadow-sm p-6 mt-8">
-
-        <div class="flex justify-between items-start mb-3">
-
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold">
-            JD
+              <div class="text-sm text-gray-500 mt-1">
+                124 reviews
+              </div>
             </div>
 
-            <div>
-            <div class="font-semibold">John Doe</div>
-            <div class="text-xs text-gray-500">
-                ✔ Verified Purchaser
+            <!-- RIGHT BARS -->
+            <div class="flex-1 space-y-4 text-sm">
+
+              <!-- 5 Star -->
+              <div class="flex items-center gap-4">
+                <span class="w-4 text-gray-600">5</span>
+                <div class="flex-1 bg-gray-200 h-2.5 rounded-full">
+                  <div class="bg-green-500 h-2.5 rounded-full w-[90%]"></div>
+                </div>
+                <span class="w-12 text-right text-gray-500">90%</span>
+              </div>
+
+              <!-- 4 Star -->
+              <div class="flex items-center gap-4">
+                <span class="w-4 text-gray-600">4</span>
+                <div class="flex-1 bg-gray-200 h-2.5 rounded-full">
+                  <div class="bg-green-500 h-2.5 rounded-full w-[5%]"></div>
+                </div>
+                <span class="w-12 text-right text-gray-500">5%</span>
+              </div>
+
+              <!-- 3 Star -->
+              <div class="flex items-center gap-4">
+                <span class="w-4 text-gray-600">3</span>
+                <div class="flex-1 bg-gray-200 h-2.5 rounded-full">
+                  <div class="bg-green-500 h-2.5 rounded-full w-[2%]"></div>
+                </div>
+                <span class="w-12 text-right text-gray-500">2%</span>
+              </div>
+
+              <!-- 2 Star -->
+              <div class="flex items-center gap-4">
+                <span class="w-4 text-gray-600">2</span>
+                <div class="flex-1 bg-gray-200 h-2.5 rounded-full">
+                  <div class="bg-green-500 h-2.5 rounded-full w-[1%]"></div>
+                </div>
+                <span class="w-12 text-right text-gray-500">1%</span>
+              </div>
+
+              <!-- 1 Star -->
+              <div class="flex items-center gap-4">
+                <span class="w-4 text-gray-600">1</span>
+                <div class="flex-1 bg-gray-200 h-2.5 rounded-full">
+                  <div class="bg-green-500 h-2.5 rounded-full w-[2%]"></div>
+                </div>
+                <span class="w-12 text-right text-gray-500">2%</span>
+              </div>
+
             </div>
-            </div>
-        </div>
 
-        <div class="text-green-500">
-            ★★★★★
-        </div>
+          </div>
 
         </div>
 
-            <p class="text-gray-600 text-sm">
-            ผลิตภัณฑ์ใช้งานได้ดี เห็นผลชัดเจนภายในไม่กี่วัน แนะนำสำหรับเกษตรกรที่ต้องการควบคุมศัตรูพืชอย่างปลอดภัย
-            </p>
 
-        <div class="text-xs text-gray-400 mt-4">
-            2 weeks ago • 👍 Helpful (12)
+        <!-- ===================== -->
+        <!-- PHOTOS SECTION -->
+        <!-- ===================== -->
+        <div class="mt-8">
+          <h4 class="text-sm font-semibold mb-4 text-gray-700">
+            Photos from farmers
+          </h4>
+
+          <div class="flex gap-4">
+            <img src="/Review1.png" class="w-28 h-20 object-cover rounded-md"/>
+            <img src="/Review2.png" class="w-28 h-20 object-cover rounded-md"/>
+            <img src="/Review3.png" class="w-28 h-20 object-cover rounded-md"/>
+          </div>
         </div>
+
+          <!-- ===================== -->
+          <!-- SINGLE REVIEW CARD -->
+          <!-- ===================== -->
+          <div class="bg-white rounded-2xl shadow-sm p-6 mt-8">
+
+              <div class="flex justify-between items-start mb-3">
+
+              <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold">
+                  JD
+                  </div>
+
+                  <div>
+                  <div class="font-semibold">John Doe</div>
+                  <div class="text-xs text-gray-500">
+                      ✔ Verified Purchaser
+                  </div>
+                  </div>
+              </div>
+
+              <div class="text-green-500">
+                  ★★★★★
+              </div>
+
+              </div>
+
+                  <p class="text-gray-600 text-sm">
+                  ผลิตภัณฑ์ใช้งานได้ดี เห็นผลชัดเจนภายในไม่กี่วัน แนะนำสำหรับเกษตรกรที่ต้องการควบคุมศัตรูพืชอย่างปลอดภัย
+                  </p>
+
+              <div class="text-xs text-gray-400 mt-4">
+                  2 weeks ago • 👍 Helpful (12)
+              </div>
+
+          </div>
+
+          </div>
 
     </div>
 
-    </div>
+    <!-- Confirm Popup -->
+      <div
+        v-if="showConfirm"
+        class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      >
+        <div class="bg-white rounded-xl p-6 w-90 text-center">
+          <h3 class="font-bold text-lg mb-3">
+            ยืนยันการเพิ่มสินค้า
+          </h3>
 
-    </div>
+          <p class="text-gray-600 mb-5">
+            ต้องการเพิ่มสินค้า
+            <span class="font-bold">
+              {{ selectedProduct?.name }}
+            </span>
+            ลงตะกร้าหรือไม่?
+          </p>
+
+          <div class="flex gap-3 justify-center">
+            <button
+              @click="closeConfirm"
+              class="px-4 py-2 rounded border"
+            >
+              ยกเลิก
+            </button>
+
+            <button
+              @click="confirmAddToCart"
+              class="px-4 py-2 rounded bg-[#13ec25] text-black font-bold"
+            >
+              ยืนยัน
+            </button>
+          </div>
+        </div>
+      </div>
 
     <Footer />
   </div>

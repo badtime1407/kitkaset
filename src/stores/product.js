@@ -14,7 +14,8 @@ export const useProductStore = defineStore("product", {
         price: 320,
         image: "https://max-ag.com/wp-content/uploads/2022/02/%E0%B8%AD%E0%B8%B0%E0%B8%9A%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%99.png",
         brand: "Bayer Crop Science",
-        category: "herbicide"
+        category: "herbicide",
+        description: "สารกำจัดศัตรูพืชประสิทธิภาพสูง ใช้ควบคุมแมลงและไรในพืชผักและไม้ผล เห็นผลรวดเร็วภายใน 24-48 ชั่วโมง"
       },
       {
         id: 2,
