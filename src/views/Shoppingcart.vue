@@ -245,7 +245,7 @@
             </div>
 
             <!-- Checkout -->
-            <button
+            <button @click="goToPayment"
               class="w-full bg-[#13ec25] text-[#0d1b0f] py-4 rounded-xl font-bold flex items-center justify-center gap-2"
             >
               ดำเนินการชำระเงิน
@@ -265,6 +265,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
 import { useCartStore } from "@/stores/cart";
 import Navbar2 from "../components/Navbar2.vue";
 
@@ -308,4 +309,17 @@ function applyCoupon() {
 const finalTotal = computed(() => {
   return cart.totalPrice + shipping - discount.value;
 });
+
+// Payment
+const router = useRouter();
+
+function goToPayment() {
+  router.push({
+    path: "/payment",
+    query: {
+      shipping: shipping,
+      discount: discount.value,
+    },
+  });
+}
 </script>
