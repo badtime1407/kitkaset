@@ -7,10 +7,10 @@ const route = useRoute()
 
 // ข้อมูลโปรไฟล์ผู้ใช้
 const userProfile = reactive({
-  fullName: 'Johnathan Appleseed',
-  phone: '+1 (5ฤ55) 123-4567',
-  email: 'j.appleseed@agrifarm.com',
-  dob: '1985-05-12',
+  fullName: '',
+  phone: '',
+  email: '',
+  dob: '',
   avatar: 'https://cdn-icons-png.freepik.com/512/10130/10130567.png' 
 })
 
