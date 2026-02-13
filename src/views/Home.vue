@@ -157,7 +157,7 @@ const addToCart = (product) => {
               ผู้เชี่ยวชาญเกษตรของเราพร้อมวินิจฉัยโรคพืชและแนะนำผลิตภัณฑ์ที่แม่นยำให้คุณฟรี
             </p>
             <div>
-              <router-link to="/Chat">
+              <router-link to="/Advicecenter">
                 <button class="flex items-center gap-2 bg-[#1ED730] text-[#0d1b0f] font-bold px-6 py-3 rounded-lg hover:bg-[#18b528] transition-all shadow-md active:scale-95">
                   <span class="material-symbols-outlined">support_agent</span>
                   คุยกับผู้เชี่ยวชาญ
