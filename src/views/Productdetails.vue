@@ -102,17 +102,22 @@ function confirmAddToCart() {
           </div>
 
           <!-- Buttons -->
-          <div class="space-y-3 mb-6">
-            <button @click="openConfirm(product)"
+          <div class="space-y-4 mb-6">
+
+            <button 
+              @click="openConfirm(product)"
               class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md font-semibold">
               Buy Now
             </button>
 
-            <button
-              class="w-full border border-green-500 text-green-600 py-3 rounded-md font-semibold hover:bg-green-50"
-            >
-              Chat with Agronomist
-            </button>
+            <router-link to="/chat" class="block">
+              <button
+                class="w-full border border-green-500 text-green-600 py-3 rounded-md font-semibold hover:bg-green-50 mt-2"
+              >
+                Chat with Agronomist
+              </button>
+            </router-link>
+
           </div>
 
           <!-- Small Icons -->
