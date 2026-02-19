@@ -277,7 +277,7 @@
           @click="confirmOrder"
           class="w-full mt-6 bg-[#13ec25] text-black font-bold py-3 rounded-xl"
         >
-          กลับหน้าหลัก
+          ไปหน้าประวัติการสั่งซื้อ
         </button>
 
       </div>
