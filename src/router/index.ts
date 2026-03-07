@@ -15,7 +15,7 @@ import Productdetails from '../views/Productdetails.vue'
 import Advicecenter from '../views/Advicecenter.vue'
 
 const routes = [
-  { path: '/', component: Home },
+  { path: '/', component: Login },
   { path: '/login', component: Login},
   { path: '/register', component: Register},
   { path: '/resetpassword', component: Resetpassword},
