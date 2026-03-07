@@ -27,11 +27,11 @@ const isActive = (path) => route.path === path
 
 // ข้อมูลตัวเลือกพืชผล
 const cropOptions = ref([
-  { id: 'rice', name: 'Rice', icon: 'eco', selected: true },
-  { id: 'sugarcane', name: 'Sugarcane', icon: 'grass', selected: true },
-  { id: 'corn', name: 'Corn', icon: 'potted_plant', selected: false },
-  { id: 'wheat', name: 'Wheat', icon: 'grain', selected: false },
-  { id: 'soy', name: 'Soybean', icon: 'spa', selected: false },
+  { id: 'rice', name: 'ข้าว', icon: 'eco', selected: true },
+  { id: 'sugarcane', name: 'อ้อย', icon: 'grass', selected: true },
+  { id: 'corn', name: 'ข้าวโพด', icon: 'potted_plant', selected: false },
+  { id: 'wheat', name: 'ข้าวสาลี', icon: 'grain', selected: false },
+  { id: 'soy', name: 'ถั่วเหลือง', icon: 'spa', selected: false },
 ])
 
 const savePreferences = () => {
@@ -70,11 +70,11 @@ const savePreferences = () => {
                 </label>
               </div>
               <div class="text-center md:text-left">
-                <h3 class="text-[#1A3128] text-3xl font-black mb-3">Farmer Profile Photo</h3>
-                <p class="text-gray-400 text-base mb-8 font-medium">JPG, PNG or GIF. Recommended size 400×400px.</p>
+                <h3 class="text-[#1A3128] text-3xl font-black mb-3">โปรไฟล์</h3>
+                <p class="text-gray-400 text-base mb-8 font-medium">ไฟล์ JPG, PNG หรือ GIF ขนาดที่แนะนำ 400×400px.</p>
                 <div class="flex gap-5 justify-center md:justify-start">
-                  <button class="bg-[#00D632] text-white text-base font-bold px-10 py-4 rounded-2xl hover:shadow-xl hover:shadow-green-200 hover:-translate-y-1 transition-all">Upload New</button>
-                  <button class="text-gray-400 text-base font-bold px-8 py-4 hover:text-rose-500 transition-colors">Remove</button>
+                  <button class="bg-[#00D632] text-white text-base font-bold px-10 py-4 rounded-2xl hover:shadow-xl hover:shadow-green-200 hover:-translate-y-1 transition-all">อัปโหลดภาพ</button>
+                  <button class="text-gray-400 text-base font-bold px-8 py-4 hover:text-rose-500 transition-colors">ลบภาพ</button>
                 </div>
               </div>
             </div>
@@ -111,9 +111,9 @@ const savePreferences = () => {
             </div>
 
             <div class="flex flex-col sm:flex-row justify-end items-center gap-10 mt-20 pt-12 border-t border-gray-100">
-              <button class="text-lg font-bold text-gray-400 hover:text-gray-600 transition-colors">Cancel</button>
+              <button class="text-lg font-bold text-gray-400 hover:text-gray-600 transition-colors">ยกเลิก</button>
               <button @click="savePreferences" class="w-full sm:w-auto px-20 py-5 text-lg font-black text-white bg-[#00D632] rounded-[24px] shadow-2xl shadow-green-200 hover:brightness-105 hover:-translate-y-1 active:scale-95 transition-all">
-                Save Preferences
+                บันทึก
               </button>
             </div>
           </div>
