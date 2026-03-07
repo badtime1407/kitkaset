@@ -353,8 +353,26 @@ function placeOrder() {
 }
 
 function confirmOrder() {
+
+  const orders = JSON.parse(localStorage.getItem("orders") || "[]")
+
+  const newOrder = {
+    id: orderId.value,
+    date: new Date().toLocaleDateString("th-TH"),
+    items: cart.items.map(i => `${i.name} (x${i.qty})`).join(", "),
+    price: finalTotal.value,
+    status: "Completed"
+  }
+
+  orders.unshift(newOrder)
+
+  localStorage.setItem("orders", JSON.stringify(orders))
+
   cart.clear()
+
   showSuccess.value = false
+
   router.push("/order")
+
 }
 </script>
