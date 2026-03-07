@@ -51,10 +51,10 @@
                 <tr
                   class="text-xs font-bold text-gray-800 uppercase bg-[#f0f7f0]"
                 >
-                  <th class="px-8 py-6">Product</th>
-                  <th class="px-4 py-6 text-center">Price</th>
-                  <th class="px-4 py-6 text-center">Quantity</th>
-                  <th class="px-8 py-6 text-right">Total</th>
+                  <th class="px-8 py-6">สินค้า</th>
+                  <th class="px-4 py-6 text-center">ราคา</th>
+                  <th class="px-4 py-6 text-center">จำนวน</th>
+                  <th class="px-8 py-6 text-right">ราคา</th>
                 </tr>
               </thead>
 
@@ -163,21 +163,21 @@
             <h2
               class="text-xl font-bold mb-6 border-b border-[#cfe7d1] pb-4"
             >
-              Order Summary
+              สรุปคำสั่งซื้อ
             </h2>
 
             <!-- Price -->
             <div class="space-y-4 mb-6 text-sm">
 
               <div class="flex justify-between text-gray-400 font-medium">
-                <span>Subtotal</span>
+                <span>ยอดสินค้า</span>
                 <span class="font-bold text-gray-700">
                   ฿{{ cart.totalPrice }}
                 </span>
               </div>
 
               <div class="flex justify-between text-gray-400 font-medium">
-                <span>Shipping</span>
+                <span>ค่าจัดส่ง</span>
                 <span class="font-bold text-gray-700">
                   ฿{{ shipping }}
                 </span>
@@ -186,7 +186,7 @@
               <div
                 class="flex justify-between text-[#13ec25] font-medium"
               >
-                <span>Discount</span>
+                <span>ส่วนลด</span>
                 <span class="font-bold">
                   -฿{{ discount }}
                 </span>
@@ -196,7 +196,7 @@
                 class="flex justify-between items-baseline pt-4 border-t border-[#cfe7d1]"
               >
                 <span class="text-lg font-bold text-gray-900">
-                  Total
+                  ยอดรวม
                 </span>
 
                 <span
@@ -214,7 +214,7 @@
               <label
                 class="block text-xs font-bold text-gray-800 mb-2 uppercase"
               >
-                Discount Code
+                รหัสส่วนลด
               </label>
 
               <div class="flex gap-2">
@@ -230,7 +230,7 @@
                   @click="applyCoupon"
                   class="bg-[#13ec25] text-[#0d1b0f] px-5 py-2 rounded-xl font-bold text-sm"
                 >
-                  Apply
+                  ยืนยัน
                 </button>
 
               </div>
