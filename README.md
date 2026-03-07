@@ -1,6 +1,45 @@
-# Vue 3 + TypeScript + Vite
+🌱 KitKaset
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+ระบบเว็บสำหรับจัดการข้อมูลด้านการเกษตร (Agriculture Management System) พัฒนาโดยใช้ Vue 3 + TypeScript + Vite + TailwindCSS เพื่อให้สามารถสร้าง UI ที่รวดเร็วและทันสมัย
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
-"# kitkaset" 
+📌 Features
+
+🌾 ระบบจัดการข้อมูลการเกษตร
+
+📊 แสดงข้อมูลผ่าน Web Interface
+
+⚡ ใช้ Vue 3 Composition API
+
+🎨 ออกแบบ UI ด้วย TailwindCSS
+
+🚀 Build ด้วย Vite เพื่อความเร็วสูง
+
+🛠 Tech Stack
+
+-Frontend
+
+Vue 3
+
+-TypeScript
+-JavaScript
+-Vite
+-TailwindCSS
+
+Tools
+
+-Node.js
+-npm
+
+⚙️ Installation
+
+ติดตั้ง dependencies
+
+npm install
+
+▶️ Run Development Server
+
+npm run dev
+
+เปิดใน browser
+
+http://localhost:5173
