@@ -66,7 +66,7 @@
               <span class="material-symbols-outlined text-[#13ec25]">
                 payments
               </span>
-              Payment Method
+              วิธีการชำระเงิน
             </h2>
 
             <div class="bg-white p-6 rounded-xl border shadow-sm space-y-6">

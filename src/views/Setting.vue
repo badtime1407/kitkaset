@@ -7,10 +7,10 @@ const route = useRoute()
 
 /* Menu */
 const navigationItems = [
-  { name: 'My Profile', icon: 'person', path: '/profile' },
-  { name: 'Address Book', icon: 'location_on', path: '/Address' },
-  { name: 'Order History', icon: 'inventory_2', path: '/Order' },
-  { name: 'Account Settings', icon: 'settings', path: '/Setting' },
+  { name: 'โปรไฟล์ของฉัน', icon: 'person', path: '/profile' },
+  { name: 'สมุดที่อยู่', icon: 'location_on', path: '/Address' },
+  { name: 'ประวัติคำสั่งซื้อ', icon: 'inventory_2', path: '/Order' },
+  { name: 'ตั้งค่าบัญชี', icon: 'settings', path: '/Setting' },
 ]
 
 const isActive = (path) => route.path === path
@@ -37,15 +37,15 @@ const updatePassword = () => {
   }
 
   if (newPassword.value !== confirmPassword.value) {
-    alert('รหัสผ่านไม่ตรงกัน')
+    alert('รหัสผ่านใหม่ไม่ตรงกัน')
     return
   }
 
-  alert('เปลี่ยนรหัสผ่านสำเร็จ (demo)')
+  alert('เปลี่ยนรหัสผ่านสำเร็จ (ตัวอย่าง)')
 }
 
 const saveAll = () => {
-  alert('บันทึกเรียบร้อย (demo)')
+  alert('บันทึกการตั้งค่าเรียบร้อย (ตัวอย่าง)')
 }
 
 const discard = () => {
@@ -101,14 +101,14 @@ const discard = () => {
             <div>
 
               <h3 class="section-title">
-                Change Password
+                เปลี่ยนรหัสผ่าน
               </h3>
 
               <div class="grid md:grid-cols-2 gap-8 mt-8">
 
                 <div class="col-span-2">
                   <label class="label">
-                    Current Password
+                    รหัสผ่านปัจจุบัน
                   </label>
 
                   <input
@@ -120,7 +120,7 @@ const discard = () => {
 
                 <div>
                   <label class="label">
-                    New Password
+                    รหัสผ่านใหม่
                   </label>
 
                   <input
@@ -132,7 +132,7 @@ const discard = () => {
 
                 <div>
                   <label class="label">
-                    Confirm Password
+                    ยืนยันรหัสผ่านใหม่
                   </label>
 
                   <input
@@ -151,7 +151,7 @@ const discard = () => {
                   @click="updatePassword"
                   class="btn-main"
                 >
-                  Update Password
+                  อัปเดตรหัสผ่าน
                 </button>
 
               </div>
@@ -173,11 +173,11 @@ const discard = () => {
                 <div>
 
                   <p class="font-black text-lg">
-                    Two-Factor Authentication
+                    การยืนยันตัวตนสองขั้นตอน (2FA)
                   </p>
 
                   <p class="text-gray-400">
-                    ยืนยันตัวตน 2 ขั้นตอน
+                    เพิ่มความปลอดภัยให้กับบัญชีของคุณ
                   </p>
 
                 </div>
@@ -189,7 +189,7 @@ const discard = () => {
                 @click="twoFA = !twoFA"
                 class="btn-outline"
               >
-                {{ twoFA ? 'Disable' : 'Enable' }}
+                {{ twoFA ? 'ปิดใช้งาน' : 'เปิดใช้งาน' }}
               </button>
 
             </div>
@@ -210,11 +210,11 @@ const discard = () => {
 
                   <div>
                     <p class="font-bold">
-                      Order Updates
+                      การอัปเดตคำสั่งซื้อ
                     </p>
 
                     <p class="desc">
-                      แจ้งสถานะคำสั่งซื้อ
+                      แจ้งเตือนสถานะคำสั่งซื้อ
                     </p>
                   </div>
 
@@ -227,11 +227,11 @@ const discard = () => {
 
                   <div>
                     <p class="font-bold">
-                      Expert Advice
+                      คำแนะนำจากผู้เชี่ยวชาญ
                     </p>
 
                     <p class="desc">
-                      คำแนะนำจากผู้เชี่ยวชาญ
+                      รับคำแนะนำเกี่ยวกับการเกษตร
                     </p>
                   </div>
 
@@ -244,11 +244,11 @@ const discard = () => {
 
                   <div>
                     <p class="font-bold">
-                      Market Alert
+                      แจ้งเตือนราคาตลาด
                     </p>
 
                     <p class="desc">
-                      เตือนราคาตลาด
+                      รับข้อมูลราคาตลาดล่าสุด
                     </p>
                   </div>
 
@@ -261,11 +261,11 @@ const discard = () => {
 
                   <div>
                     <p class="font-bold">
-                      Newsletter
+                      จดหมายข่าว
                     </p>
 
                     <p class="desc">
-                      ข่าวสารเกษตร
+                      ข่าวสารและบทความด้านเกษตร
                     </p>
                   </div>
 
@@ -289,7 +289,7 @@ const discard = () => {
                 @click="discard"
                 class="text-lg font-bold text-gray-400 hover:text-gray-600"
               >
-                Cancel
+                ยกเลิก
               </button>
 
 
@@ -297,7 +297,7 @@ const discard = () => {
                 @click="saveAll"
                 class="btn-main px-20 py-5 text-lg"
               >
-                Save Changes
+                บันทึกการเปลี่ยนแปลง
               </button>
 
             </div>
