@@ -140,7 +140,7 @@
           <div class="bg-white rounded-xl p-6 shadow-lg sticky top-10">
 
             <h3 class="text-xl font-bold mb-6 border-b pb-4">
-              Order Summary
+              สรุปคำสั่งซื้อ
             </h3>
 
             <div class="space-y-4 mb-6">
@@ -173,27 +173,27 @@
             <div class="space-y-3 border-t pt-4 mb-6 text-sm">
 
               <div class="flex justify-between">
-                <span>Subtotal</span>
+                <span>ยอดรวม</span>
                 <span>฿{{ cart.totalPrice }}</span>
               </div>
 
               <div class="flex justify-between">
-                <span>Shipping</span>
+                <span>ค่าจัดส่ง</span>
                 <span>฿{{ shipping }}</span>
               </div>
 
               <div class="flex justify-between">
-                <span>Discount</span>
+                <span>ส่วนลด</span>
                 <span class="text-red-500">-฿{{ discount }}</span>
               </div>
 
               <div class="flex justify-between">
-                <span>Tax (5%)</span>
+                <span>ภาษี (7%)</span>
                 <span>฿{{ tax }}</span>
               </div>
 
               <div class="flex justify-between text-xl font-bold text-[#13ec25] pt-2">
-                <span>Total</span>
+                <span>ยอดรวม</span>
                 <span>฿{{ finalTotal }}</span>
               </div>
 
@@ -203,7 +203,7 @@
               @click="placeOrder"
               class="w-full bg-[#13ec25] text-black font-bold py-4 rounded-xl"
             >
-              PLACE ORDER
+              ยืนยันการสั่งซื้อ
             </button>
 
           </div>
@@ -313,7 +313,7 @@ const cardNumber = ref("")
 const cardExpiry = ref("")
 const cardCVV = ref("")
 
-const tax = computed(() => Math.round(cart.totalPrice * 0.05))
+const tax = computed(() => Math.round(cart.totalPrice * 0.07))
 
 const finalTotal = computed(() => {
   const total = cart.totalPrice + shipping + tax.value - discount
