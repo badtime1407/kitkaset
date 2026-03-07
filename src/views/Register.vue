@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from "vue-router"
+
+const router = useRouter()
 
 // State
 const form = ref({
@@ -12,12 +15,58 @@ const form = ref({
 })
 
 const handleRegister = () => {
-  // Add validation logic here
+
+  if (!form.value.fullName.trim()) {
+    alert("Please enter your full name")
+    return
+  }
+
+  if (!form.value.phone.trim()) {
+    alert("Please enter your phone number")
+    return
+  }
+
+  // phone must be 10 digits
+  if (!/^0[0-9]{9}$/.test(form.value.phone)) {
+    alert("Phone number must be 10 digits")
+    return
+  }
+
+  if (!form.value.password) {
+    alert("Please enter a password")
+    return
+  }
+
+  if (form.value.password.length < 6) {
+    alert("Password must be at least 6 characters")
+    return
+  }
+
   if (form.value.password !== form.value.confirmPassword) {
     alert("Passwords do not match!")
     return
   }
-  console.log('Registering...', form.value)
+
+  if (!form.value.agreeToTerms) {
+    alert("You must agree to the Terms of Service")
+    return
+  }
+
+  // save user to localStorage
+  const users = JSON.parse(localStorage.getItem("users") || "[]")
+
+  users.push({
+    fullName: form.value.fullName,
+    phone: form.value.phone,
+    email: form.value.email,
+    password: form.value.password
+  })
+
+  localStorage.setItem("users", JSON.stringify(users))
+
+  alert("Register successful!")
+
+  router.push("/login")
 }
 </script>
 
@@ -53,25 +102,25 @@ const handleRegister = () => {
     <div class="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-8 py-8 overflow-y-auto">
       
       <div class="w-full max-w-[620px] py-4">
-        <h2 class="text-4xl font-bold text-gray-900 mb-3">Create Your Account</h2>
+        <h2 class="text-4xl font-bold text-gray-900 mb-3">สร้างบัญชีของคุณ</h2>
         <p class="text-gray-500 text-base mb-8 leading-relaxed font-medium">
-          Fill in the details below to start your journey with us.
+          กรอกข้อมูลด้านล่างเพื่อเริ่มต้นใช้งานกับเรา
         </p>
 
         <form @submit.prevent="handleRegister" class="space-y-6">
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label class="block text-sm font-bold text-gray-900 mb-2">Full Name</label>
+              <label class="block text-sm font-bold text-gray-900 mb-2">ชื่อ-นามสกุล</label>
               <input 
                 v-model="form.fullName"
                 type="text" 
-                placeholder="John Doe"
+                placeholder="สมชาย ใจดี"
                 class="w-full px-6 py-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm placeholder-gray-400 text-base transition-all"
               >
             </div>
             <div>
-              <label class="block text-sm font-bold text-gray-900 mb-2">Phone Number</label>
+              <label class="block text-sm font-bold text-gray-900 mb-2">เบอร์โทรศัพท์</label>
               <input 
                 v-model="form.phone"
                 type="tel" 
@@ -83,8 +132,8 @@ const handleRegister = () => {
 
           <div>
             <div class="flex justify-between items-center mb-2">
-              <label class="block text-sm font-bold text-gray-900">Email Address</label>
-              <span class="text-xs text-gray-400 font-medium">Optional</span>
+              <label class="block text-sm font-bold text-gray-900">อีเมล</label>
+              <span class="text-xs text-gray-400 font-medium">จำเป็น</span>
             </div>
             <input 
               v-model="form.email"
@@ -96,7 +145,7 @@ const handleRegister = () => {
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label class="block text-sm font-bold text-gray-900 mb-2">Password</label>
+              <label class="block text-sm font-bold text-gray-900 mb-2">รหัสผ่าน</label>
               <input 
                 v-model="form.password"
                 type="password" 
@@ -105,7 +154,7 @@ const handleRegister = () => {
               >
             </div>
             <div>
-              <label class="block text-sm font-bold text-gray-900 mb-2">Confirm Password</label>
+              <label class="block text-sm font-bold text-gray-900 mb-2">ยืนยันรหัสผ่าน</label>
               <input 
                 v-model="form.confirmPassword"
                 type="password" 
@@ -126,7 +175,7 @@ const handleRegister = () => {
              </div>
              <div class="ml-3 text-sm">
                <label for="terms" class="font-medium text-gray-600 select-none">
-                 I agree to the <a href="#" class="text-green-600 hover:underline font-bold">Terms of Service</a> and <a href="#" class="text-green-600 hover:underline font-bold">Privacy Policy</a>.
+                 ฉันยอมรับ <a href="#" class="text-green-600 hover:underline font-bold">เงื่อนไขการใช้งาน</a> และ <a href="#" class="text-green-600 hover:underline font-bold">นโยบายความเป็นส่วนตัว</a>.
                </label>
              </div>
           </div>
@@ -135,25 +184,25 @@ const handleRegister = () => {
            to="/login"      
            class="group w-full py-4 rounded-xl bg-[#14E532] text-black text-lg font-bold hover:bg-green-500 transition-all mt-4 text-center shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
-              Create Account 
+              สมัครสมาชิก
           </RouterLink>
 
         </form>
         
         <div class="mt-12 text-center">
             <p class="text-gray-500 font-medium">
-              Already have an account? 
+              มีบัญชีอยู่แล้ว?
               <RouterLink to="/login" class="text-green-600 font-bold hover:underline ml-1">
-                Login
+                เข้าสู่ระบบ
               </RouterLink>
             </p>
         </div>
 
         <div class="mt-16 flex justify-center gap-8 text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-bold">
-          <a href="#" class="hover:text-gray-900 transition-colors">Privacy</a>
-          <a href="#" class="hover:text-gray-900 transition-colors">Terms</a>
-          <a href="#" class="hover:text-gray-900 transition-colors">Cookies</a>
-          <a href="#" class="hover:text-gray-900 transition-colors">Help</a>
+          <a href="#" class="hover:text-gray-900 transition-colors">นโยบาย</a>
+          <a href="#" class="hover:text-gray-900 transition-colors">นโยบาย</a>
+          <a href="#" class="hover:text-gray-900 transition-colors">คุกกี้</a>
+          <a href="#" class="hover:text-gray-900 transition-colors">ช่วยเหลือ</a>
         </div>
       </div>
     </div>

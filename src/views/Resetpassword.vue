@@ -11,9 +11,9 @@ const handleSubmit = () => {
   if (newPassword.value && newPassword.value === confirmPassword.value) {
     isSubmitted.value = true;
   } else if (newPassword.value !== confirmPassword.value) {
-    alert("Passwords do not match!");
+    alert("รหัสผ่านไม่ตรงกัน!");
   } else {
-    alert("Please enter a password.");
+    alert("กรุณากรอกรหัสผ่าน");
   }
 };
 </script>
@@ -36,22 +36,23 @@ const handleSubmit = () => {
       <div class="w-full max-w-[480px] bg-white rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8 md:p-10 transition-all">
         
         <div class="text-center mb-10">
-          <h1 class="text-[32px] font-bold text-black leading-tight mb-3">Create New Password</h1>
+          <h1 class="text-[32px] font-bold text-black leading-tight mb-3">ตั้งรหัสผ่านใหม่</h1>
           <p class="text-[#6B7280] text-base font-normal">
-            Ensure your account is secure by choosing a strong password.
+            เพื่อความปลอดภัยของบัญชี กรุณาตั้งรหัสผ่านที่มีความปลอดภัย
           </p>
         </div>
 
         <form v-if="!isSubmitted" @submit.prevent="handleSubmit" class="space-y-6">
           <div class="space-y-5">
+
             <div class="space-y-2">
-              <label class="block text-sm font-bold text-black">Email or Phone Number</label>
+              <label class="block text-sm font-bold text-black">รหัสผ่านใหม่</label>
               <div class="relative">
                 <input 
                   v-model="newPassword"
                   :type="showNewPassword ? 'text' : 'password'"
                   class="w-full h-[56px] bg-[#F9FBF9] border border-[#E2E8E2] rounded-lg px-4 focus:outline-none focus:border-[#22C55E] transition-colors"
-                  placeholder="XXXXX"
+                  placeholder="••••••••"
                 />
                 <button type="button" @click="showNewPassword = !showNewPassword" class="absolute right-4 top-4 text-[#9CA3AF] hover:text-[#22C55E]">
                   <span class="material-symbols-outlined text-[22px]">{{ showNewPassword ? 'visibility' : 'visibility_off' }}</span>
@@ -60,7 +61,7 @@ const handleSubmit = () => {
             </div>
 
             <div class="space-y-2">
-              <label class="block text-sm font-bold text-black">Confirm New Password</label>
+              <label class="block text-sm font-bold text-black">ยืนยันรหัสผ่านใหม่</label>
               <div class="relative">
                 <input 
                   v-model="confirmPassword"
@@ -73,19 +74,19 @@ const handleSubmit = () => {
                 </button>
               </div>
             </div>
+
           </div>
 
           <RouterLink 
            to="/Login" 
             class="w-full h-[60px] bg-[#1AFE30] hover:bg-[#16e52b] text-black font-bold text-lg rounded-xl transition-all shadow-sm flex items-center justify-center leading-tight active:scale-[0.98]"
           >
-            Update<br>Password
+            อัปเดตรหัสผ่าน
         </RouterLink >
         </form>
       </div>
     </main>
 
-    
   </div>
 </template>
 
