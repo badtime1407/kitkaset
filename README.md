@@ -16,10 +16,9 @@
 
 🛠 Tech Stack
 
--Frontend
+Frontend
 
-Vue 3
-
+-Vue 3
 -TypeScript
 -JavaScript
 -Vite
