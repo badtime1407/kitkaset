@@ -4,10 +4,10 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 const navigationItems = [
-  { name: 'My Profile', icon: 'person', path: '/profile' },
-  { name: 'Address Book', icon: 'location_on', path: '/Address' },
-  { name: 'Order History', icon: 'inventory_2', path: '/Order' },
-  { name: 'Account Settings', icon: 'settings', path: '/Setting' },
+  { name: 'โปรไฟล์', icon: 'person', path: '/profile' },
+  { name: 'ที่อยู่จัดส่ง', icon: 'location_on', path: '/Address' },
+  { name: 'ประวัติการสั่งซื้อ', icon: 'inventory_2', path: '/Order' },
+  { name: 'ตั้งค่า', icon: 'settings', path: '/Setting' },
 ]
 
 const isActive = (path) => route.path === path
@@ -50,7 +50,7 @@ const isActive = (path) => route.path === path
           class="flex items-center gap-3.5 px-4 py-3.5 text-rose-500 hover:bg-rose-50 rounded-2xl transition-all font-bold text-sm no-underline"
         >
           <span class="material-symbols-outlined text-[22px]">logout</span>
-          <span>Logout</span>
+          <span>ออกจากระบบ</span>
         </router-link>
       </div>
     </div>
