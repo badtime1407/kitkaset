@@ -1,7 +1,6 @@
 <template>
-  <div class="font-prompt flex h-screen flex-col overflow-hidden bg-[#f0f2f0] text-gray-800 font-medium">
+  <div class="flex h-screen flex-col overflow-hidden bg-[#f0f2f0] text-gray-800">
     <Navbar2 />
-
     <main class="flex flex-1 overflow-hidden">
       <aside class="w-80 border-r border-[#e7f3e8] bg-[#fcfdfc] flex flex-col shrink-0">
         <div class="p-5 border-b border-[#e7f3e8]">
