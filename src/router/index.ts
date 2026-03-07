@@ -16,6 +16,7 @@ import Advicecenter from '../views/Advicecenter.vue'
 
 const routes = [
   { path: '/', component: Login },
+  { path: '/home', component: Home },
   { path: '/login', component: Login},
   { path: '/register', component: Register},
   { path: '/resetpassword', component: Resetpassword},

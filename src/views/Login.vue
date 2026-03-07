@@ -136,7 +136,7 @@ const handleLogin = () => {
           </div>
 
           <RouterLink 
-            to="/" 
+            to="/Home" 
             class="block w-full py-4 rounded-xl bg-green-500 text-black text-xl font-bold hover:bg-green-600 transition-all mt-8 text-center shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             เข้าสู่ระบบ
