@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue';
 import Navbar2 from '../components/Navbar2.vue';
 import Footer from '../components/Footer.vue';
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 // --- 1. State & Data ---
 const searchQuery = ref('');
@@ -55,9 +57,8 @@ const filteredDiseases = computed(() => {
 // --- 3. Actions ---
 
 const goToChat = () => {
-  console.log("Navigating to chat...");
-  window.location.href = '/chat'; 
-};
+  router.push('/chat')
+}
 
 const showToast = (message) => {
   const id = Date.now();
