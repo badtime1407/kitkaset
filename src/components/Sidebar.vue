@@ -17,7 +17,7 @@ const isActive = (path) => route.path === path
   <aside class="w-64 bg-white hidden lg:flex flex-col border-r border-gray-100 sticky top-0 h-screen">
     <div class="p-6 flex flex-col h-full">
       
-      <router-link to="/" class="flex items-center gap-3 shrink-0 cursor-pointer group mb-6">
+      <router-link to="/Home" class="flex items-center gap-3 shrink-0 cursor-pointer group mb-6">
             <div class="text-[#010101] size-9 transition-transform group-hover:rotate-12">
                 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <path

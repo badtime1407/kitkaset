@@ -3,7 +3,7 @@
     class="sticky top-0 z-50 flex items-center justify-between py-3 px-6 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100"
   >
     <!-- Logo -->
-    <router-link to="/" class="flex items-center gap-3 shrink-0 cursor-pointer group">
+    <router-link to="/Home" class="flex items-center gap-3 shrink-0 cursor-pointer group">
             <div class="text-[#010101] size-9 transition-transform group-hover:rotate-12">
                 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <path
