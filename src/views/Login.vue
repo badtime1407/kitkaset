@@ -69,7 +69,6 @@ const handleLogin = () => {
             <input 
               v-model="email"
               type="text" 
-              placeholder="66xxxxxxxxx"
               class="w-full px-6 py-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm placeholder-gray-400 text-lg transition-all"
             >
           </div>
@@ -85,7 +84,6 @@ const handleLogin = () => {
               <input 
                 v-model="password"
                 :type="showPassword ? 'text' : 'password'" 
-                placeholder="••••••••"
                 class="w-full px-6 py-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm placeholder-gray-400 text-lg tracking-widest transition-all"
               >
 
